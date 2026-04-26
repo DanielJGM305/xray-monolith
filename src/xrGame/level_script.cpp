@@ -2167,7 +2167,7 @@ DBG_ScriptObject* add_object(LPCSTR s, DebugRenderType type)
 {
 	shared_str id(s);
 	remove_object(id.c_str());
-	DBG_ScriptObject* dbg_obj = nullptr;
+	DBG_ScriptObject* dbg_obj = NULL;
 
 	switch (type)
 	{

@@ -55,13 +55,13 @@ namespace soundSmoothingParams {
 
 extern CConsole* Console;
 
-CSoundRender_CoreA* SoundRenderA = nullptr;
+CSoundRender_CoreA* SoundRenderA = NULL;
 
 CSoundRender_CoreA::CSoundRender_CoreA() : CSoundRender_Core()
 {
-	pDevice = nullptr;
-	pDeviceList = nullptr;
-	pContext = nullptr;
+	pDevice = NULL;
+	pDeviceList = NULL;
+	pContext = NULL;
 }
 
 CSoundRender_CoreA::~CSoundRender_CoreA()
@@ -410,7 +410,7 @@ void CSoundRender_CoreA::_initialize(int stage)
 		CHECK_OR_EXIT(0, "SOUND: OpenAL: Failed to create context.");
 		bPresent = FALSE;
 		alcCloseDevice(pDevice);
-		pDevice = nullptr;
+		pDevice = NULL;
 		return;
 	}
 
@@ -486,7 +486,7 @@ void CSoundRender_CoreA::_initialize(int stage)
 	if (stage == 1) //first initialize
 	{
 		// Pre-create targets
-		CSoundRender_Target* T = nullptr;
+		CSoundRender_Target* T = NULL;
 		for (u32 tit = 0; tit < u32(psSoundTargets); tit++)
 		{
 			T = xr_new<CSoundRender_TargetA>();
@@ -520,7 +520,7 @@ void CSoundRender_CoreA::_clear()
 {
 	inherited::_clear();
 	// remove targets
-	CSoundRender_Target* T = nullptr;
+	CSoundRender_Target* T = NULL;
 	for (u32 tit = 0; tit < s_targets.size(); tit++)
 	{
 		T = s_targets[tit];
@@ -531,9 +531,9 @@ void CSoundRender_CoreA::_clear()
 	alcMakeContextCurrent(NULL);
 	// Release the context and the device.
 	alcDestroyContext(pContext);
-	pContext = nullptr;
+	pContext = NULL;
 	alcCloseDevice(pDevice);
-	pDevice = nullptr;
+	pDevice = NULL;
 	xr_delete(pDeviceList);
 }
 

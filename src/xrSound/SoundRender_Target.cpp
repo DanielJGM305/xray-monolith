@@ -25,7 +25,7 @@ BOOL CSoundRender_Target::_initialize()
 
 void CSoundRender_Target::_destroy()
 {
-	m_pEmitter = nullptr;
+	m_pEmitter = NULL;
 	rendering = FALSE;
 	wave = 0;
 }

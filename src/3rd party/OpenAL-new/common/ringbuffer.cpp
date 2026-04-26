@@ -185,7 +185,7 @@ auto RingBuffer::getReadVector() const noexcept -> DataPair
         /* Single part vector: just the rest of the buffer */
         ret.first.buf = const_cast<al::byte*>(mBuffer.data() + r*mElemSize);
         ret.first.len = free_cnt;
-        ret.second.buf = nullptr;
+        ret.second.buf = NULL;
         ret.second.len = 0;
     }
 
@@ -216,7 +216,7 @@ auto RingBuffer::getWriteVector() const noexcept -> DataPair
     {
         ret.first.buf = const_cast<al::byte*>(mBuffer.data() + w*mElemSize);
         ret.first.len = free_cnt;
-        ret.second.buf = nullptr;
+        ret.second.buf = NULL;
         ret.second.len = 0;
     }
 

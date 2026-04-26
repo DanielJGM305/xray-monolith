@@ -6,8 +6,8 @@ HINSTANCE hInstance = (HINSTANCE)&__ImageBase;
 
 //Credits for idea SSE ReShade Helper https://www.nexusmods.com/skyrimspecialedition/mods/78961
 
-static reshade::api::effect_runtime* m_runtime = nullptr;
-static reshade::api::command_list* m_cmdlist = nullptr;
+static reshade::api::effect_runtime* m_runtime = NULL;
+static reshade::api::command_list* m_cmdlist = NULL;
 static reshade::api::resource_view m_rtv;
 static reshade::api::resource_view m_rtv_srgb;
 
@@ -39,8 +39,8 @@ void unregister_reshade()
 {
 	reshade::unregister_event<reshade::addon_event::reshade_begin_effects>(on_reshade_begin_effects);
 	reshade::unregister_addon(hInstance);
-	m_runtime = nullptr;
-	m_cmdlist = nullptr;
+	m_runtime = NULL;
+	m_cmdlist = NULL;
 	m_rtv.handle = 0;
 	m_rtv_srgb.handle = 0;
 }

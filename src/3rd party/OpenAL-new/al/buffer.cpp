@@ -369,8 +369,8 @@ void LoadData(ALCcontext *context, ALbuffer *ALBuf, ALsizei freq, ALuint size,
     ALBuf->mType = DstType;
     ALBuf->mAmbiOrder = ambiorder;
 
-    ALBuf->mCallback = nullptr;
-    ALBuf->mUserData = nullptr;
+    ALBuf->mCallback = NULL;
+    ALBuf->mUserData = NULL;
 
     ALBuf->mSampleLen = blocks * align;
     ALBuf->mLoopStart = 0;
@@ -512,8 +512,8 @@ void PrepareUserPtr(ALCcontext *context, ALbuffer *ALBuf, ALsizei freq,
     eax_x_ram_clear(*context->mALDevice, *ALBuf);
 #endif
 
-    ALBuf->mCallback = nullptr;
-    ALBuf->mUserData = nullptr;
+    ALBuf->mCallback = NULL;
+    ALBuf->mUserData = NULL;
 
     ALBuf->OriginalSize = sdatalen;
     ALBuf->Access = 0;
@@ -1535,7 +1535,7 @@ BufferSubList::~BufferSubList()
     }
     FreeMask = ~usemask;
     al_free(Buffers);
-    Buffers = nullptr;
+    Buffers = NULL;
 }
 
 

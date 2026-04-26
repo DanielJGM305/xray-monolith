@@ -116,15 +116,15 @@ void dx103DFluidRenderer::Destroy()
 	if (!m_bInited) return;
 
 	//createJitterTexture();
-	m_JitterTexture = nullptr;
-	m_HHGGTexture = nullptr;
+	m_JitterTexture = NULL;
+	m_HHGGTexture = NULL;
 
 	//createScreenQuad();
-	m_GeomQuadVertex = nullptr;
+	m_GeomQuadVertex = NULL;
 	_RELEASE(m_pQuadVertexBuffer);
 
 	//createGridBox();
-	m_GeomGridBox = nullptr;
+	m_GeomGridBox = NULL;
 	_RELEASE(m_pGridBoxVertexBuffer);
 	_RELEASE(m_pGridBoxIndexBuffer);
 
@@ -155,7 +155,7 @@ void dx103DFluidRenderer::DestroyShaders()
 	for (int i = 0; i < RS_NumShaders; ++i)
 	{
 		//	Release shader's element.
-		m_RendererTechnique[i] = nullptr;
+		m_RendererTechnique[i] = NULL;
 	}
 }
 
@@ -253,7 +253,7 @@ void dx103DFluidRenderer::CreateJitterTexture()
 	dataDesc.pSysMem = data;
 	dataDesc.SysMemPitch = 256;
 
-	ID3DTexture2D* NoiseTexture = nullptr;
+	ID3DTexture2D* NoiseTexture = NULL;
 
 	CHK_DX(HW.pDevice->CreateTexture2D(&desc, &dataDesc, &NoiseTexture));
 
@@ -349,7 +349,7 @@ void dx103DFluidRenderer::CreateHHGGTexture()
 	dataDesc.pSysMem = converted;
 	dataDesc.SysMemPitch = sizeof(converted);
 
-	ID3DTexture1D* HHGGTexture = nullptr;
+	ID3DTexture1D* HHGGTexture = NULL;
 
 	CHK_DX(HW.pDevice->CreateTexture1D(&desc, &dataDesc, &HHGGTexture));
 
@@ -398,12 +398,12 @@ void dx103DFluidRenderer::CreateRayDataResources(int width, int height)
 	CalculateRenderTextureSize(width, height);
 
 
-    RT[0] = nullptr;
+    RT[0] = NULL;
 	RT[0].create(m_pRTNames[0], width, height, RTFormats[0]);
 
 	for (int i = 1; i < RRT_NumRT; ++i)
 	{
-		RT[i] = nullptr;
+		RT[i] = NULL;
 		RT[i].create(m_pRTNames[i], m_iRenderTextureWidth, m_iRenderTextureHeight, RTFormats[i]);
 	}
 }

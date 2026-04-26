@@ -35,7 +35,7 @@ public:
 		int iErr = 0;
 		if ( (m_fp) && (m_bCloseFile) ){ 
 			iErr = fclose(m_fp);
-			m_fp = NULL;
+			m_fp = nullptr;
 		}
 		return (bool)(iErr==0);
 	}

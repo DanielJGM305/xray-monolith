@@ -327,7 +327,7 @@ void probe_devices(IMMDeviceEnumerator *devenum, EDataFlow flowdir, al::vector<D
             add_device(device.get(), devid, list);
             CoTaskMemFree(devid);
         }
-        device = nullptr;
+        device = NULL;
     }
 
     for(UINT i{0};i < count;++i)
@@ -340,7 +340,7 @@ void probe_devices(IMMDeviceEnumerator *devenum, EDataFlow flowdir, al::vector<D
             add_device(device.get(), devid, list);
             CoTaskMemFree(devid);
         }
-        device = nullptr;
+        device = NULL;
     }
 }
 
@@ -559,7 +559,7 @@ int WasapiProxy::messageHandler(std::promise<HRESULT> *promise)
         return 0;
     }
     promise->set_value(S_OK);
-    promise = nullptr;
+    promise = NULL;
 
     TRACE("Starting message loop\n");
     while(Msg msg{popMessage()})
@@ -681,7 +681,7 @@ WasapiPlayback::~WasapiPlayback()
 
     if(mNotifyEvent != nullptr)
         CloseHandle(mNotifyEvent);
-    mNotifyEvent = nullptr;
+    mNotifyEvent = NULL;
 }
 
 
@@ -804,7 +804,7 @@ void WasapiPlayback::open(const char *name)
         {
             name += DevNameHeadLen;
             if(*name == '\0')
-                name = nullptr;
+                name = NULL;
         }
     }
 
@@ -859,7 +859,7 @@ HRESULT WasapiPlayback::openProxy(const char *name)
         return hr;
     }
 
-    mClient = nullptr;
+    mClient = NULL;
     mMMDev = std::move(mmdev);
     if(name) mDevice->DeviceName = std::string{DevNameHead} + name;
     else mDevice->DeviceName = DevNameHead + get_device_name_and_guid(mMMDev.get()).first;
@@ -869,8 +869,8 @@ HRESULT WasapiPlayback::openProxy(const char *name)
 
 void WasapiPlayback::closeProxy()
 {
-    mClient = nullptr;
-    mMMDev = nullptr;
+    mClient = NULL;
+    mMMDev = NULL;
 }
 
 
@@ -884,7 +884,7 @@ bool WasapiPlayback::reset()
 
 HRESULT WasapiPlayback::resetProxy()
 {
-    mClient = nullptr;
+    mClient = NULL;
 
     void *ptr;
     HRESULT hr{mMMDev->Activate(IID_IAudioClient, CLSCTX_INPROC_SERVER, nullptr, &ptr)};
@@ -911,7 +911,7 @@ HRESULT WasapiPlayback::resetProxy()
         return E_FAIL;
     }
     CoTaskMemFree(wfx);
-    wfx = nullptr;
+    wfx = NULL;
 
     const ReferenceTime per_time{ReferenceTime{seconds{mDevice->UpdateSize}} / mDevice->Frequency};
     const ReferenceTime buf_time{ReferenceTime{seconds{mDevice->BufferSize}} / mDevice->Frequency};
@@ -1053,7 +1053,7 @@ HRESULT WasapiPlayback::resetProxy()
             return E_FAIL;
         }
         CoTaskMemFree(wfx);
-        wfx = nullptr;
+        wfx = NULL;
 
         if(!GetConfigValueBool(mDevice->DeviceName.c_str(), "wasapi", "allow-resampler", true))
             mDevice->Frequency = OutputType.Format.nSamplesPerSec;
@@ -1195,8 +1195,8 @@ HRESULT WasapiPlayback::resetProxy()
     mDevice->UpdateSize = minu(RefTime2Samples(min_per, mDevice->Frequency),
         mDevice->BufferSize/2);
 
-    mResampler = nullptr;
-    mResampleBuffer = nullptr;
+    mResampler = NULL;
+    mResampleBuffer = NULL;
     mBufferFilled = 0;
     if(mDevice->Frequency != mFormat.Format.nSamplesPerSec)
     {
@@ -1252,7 +1252,7 @@ HRESULT WasapiPlayback::startProxy()
             mThread = std::thread{std::mem_fn(&WasapiPlayback::mixerProc), this};
         }
         catch(...) {
-            mRender = nullptr;
+            mRender = NULL;
             ERR("Failed to start thread\n");
             hr = E_FAIL;
         }
@@ -1276,7 +1276,7 @@ void WasapiPlayback::stopProxy()
     mKillNow.store(true, std::memory_order_release);
     mThread.join();
 
-    mRender = nullptr;
+    mRender = NULL;
     mClient->Stop();
 }
 
@@ -1346,7 +1346,7 @@ WasapiCapture::~WasapiCapture()
 
     if(mNotifyEvent != nullptr)
         CloseHandle(mNotifyEvent);
-    mNotifyEvent = nullptr;
+    mNotifyEvent = NULL;
 }
 
 
@@ -1471,7 +1471,7 @@ void WasapiCapture::open(const char *name)
         {
             name += DevNameHeadLen;
             if(*name == '\0')
-                name = nullptr;
+                name = NULL;
         }
     }
 
@@ -1533,7 +1533,7 @@ HRESULT WasapiCapture::openProxy(const char *name)
         return hr;
     }
 
-    mClient = nullptr;
+    mClient = NULL;
     if(name) mDevice->DeviceName = std::string{DevNameHead} + name;
     else mDevice->DeviceName = DevNameHead + get_device_name_and_guid(mMMDev.get()).first;
 
@@ -1542,13 +1542,13 @@ HRESULT WasapiCapture::openProxy(const char *name)
 
 void WasapiCapture::closeProxy()
 {
-    mClient = nullptr;
-    mMMDev = nullptr;
+    mClient = NULL;
+    mMMDev = NULL;
 }
 
 HRESULT WasapiCapture::resetProxy()
 {
-    mClient = nullptr;
+    mClient = NULL;
 
     void *ptr;
     HRESULT hr{mMMDev->Activate(IID_IAudioClient, CLSCTX_INPROC_SERVER, nullptr, &ptr)};
@@ -1575,7 +1575,7 @@ HRESULT WasapiCapture::resetProxy()
         return E_FAIL;
     }
     CoTaskMemFree(wfx);
-    wfx = nullptr;
+    wfx = NULL;
 
     const bool isRear51{InputType.Format.nChannels == 6
         && (InputType.dwChannelMask&X51RearMask) == X5DOT1REAR};
@@ -1666,7 +1666,7 @@ HRESULT WasapiCapture::resetProxy()
         return hr;
     }
 
-    mSampleConv = nullptr;
+    mSampleConv = NULL;
     mChannelConv = {};
 
     if(wfx != nullptr)
@@ -1678,7 +1678,7 @@ HRESULT WasapiCapture::resetProxy()
             return E_FAIL;
         }
         CoTaskMemFree(wfx);
-        wfx = nullptr;
+        wfx = NULL;
 
         auto validate_fmt = [](DeviceBase *device, uint32_t chancount, DWORD chanmask) noexcept
             -> bool
@@ -1859,7 +1859,7 @@ HRESULT WasapiCapture::startProxy()
             mThread = std::thread{std::mem_fn(&WasapiCapture::recordProc), this};
         }
         catch(...) {
-            mCapture = nullptr;
+            mCapture = NULL;
             ERR("Failed to start thread\n");
             hr = E_FAIL;
         }
@@ -1886,7 +1886,7 @@ void WasapiCapture::stopProxy()
     mKillNow.store(true, std::memory_order_release);
     mThread.join();
 
-    mCapture = nullptr;
+    mCapture = NULL;
     mClient->Stop();
     mClient->Reset();
 }

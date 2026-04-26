@@ -28,7 +28,7 @@ void *LoadLib(const char *name)
     dlerror();
     void *handle{dlopen(name, RTLD_NOW)};
     const char *err{dlerror()};
-    if(err) handle = nullptr;
+    if(err) handle = NULL;
     return handle;
 }
 void CloseLib(void *handle)
@@ -38,7 +38,7 @@ void *GetSymbol(void *handle, const char *name)
     dlerror();
     void *sym{dlsym(handle, name)};
     const char *err{dlerror()};
-    if(err) sym = nullptr;
+    if(err) sym = NULL;
     return sym;
 }
 #endif

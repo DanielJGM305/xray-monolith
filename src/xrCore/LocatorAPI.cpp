@@ -667,7 +667,7 @@ void* FileDownload(LPCSTR file_name, const int& file_handle, u32& file_size);
 static void searchForFsltx(const char* fs_name, string_path& fsltxPath)
 {
 	//#TODO: Update code, when std::filesystem is out (not much work, standards don't change dramatically)
-	const char* realFsltxName = nullptr;
+	const char* realFsltxName = NULL;
 	if (fs_name)
 	{
 		realFsltxName = fs_name;
@@ -727,7 +727,7 @@ IReader* CLocatorAPI::setup_fs_ltx(LPCSTR fs_name)
 
 	int file_handle;
 	u32 file_size;
-	IReader* result = nullptr;
+	IReader* result = NULL;
 	CHECK_OR_EXIT(file_handle_internal(fs_path, file_size, file_handle),
 	              make_string("Cannot open file \"%s\".\nCheck your working folder.", fs_name));
 

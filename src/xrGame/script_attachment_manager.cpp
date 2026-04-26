@@ -55,11 +55,11 @@ static void update_visbox_attachment(IKinematics* k)
 script_attachment::script_attachment(LPCSTR name, LPCSTR model_name): ISpatial(g_SpatialSpace)
 {
 	m_name = name;
-	m_kinematics = nullptr;
-	m_parent_attachment = nullptr;
-	m_parent_object = nullptr;
+	m_kinematics = NULL;
+	m_parent_attachment = NULL;
+	m_parent_object = NULL;
 	m_parent_level = false;
-	m_script_ui = nullptr;
+	m_script_ui = NULL;
 	m_script_ui_func = 0;
 	m_script_ui_mat = Fidentity;
 	m_script_ui_offset[0].set(0, 0, 0);
@@ -68,11 +68,11 @@ script_attachment::script_attachment(LPCSTR name, LPCSTR model_name): ISpatial(g
 	m_script_ui_offset[3].set(0, 0, 0);
 	m_script_ui_scale.set(1, 1);
 	m_script_ui_bone = 0;
-	m_script_light = nullptr;
+	m_script_light = NULL;
 	m_script_light_bone = 0;
 	m_parent_bone = 0;
 	m_offset = Fidentity;
-	renderable.visual = nullptr;
+	renderable.visual = NULL;
 	renderable.xform = Fidentity;
 	m_attachment_offset[0].set(0, 0, 0);
 	m_attachment_offset[1].set(0, 0, 0);
@@ -84,7 +84,7 @@ script_attachment::script_attachment(LPCSTR name, LPCSTR model_name): ISpatial(g
 	m_last_upd_frame = 0;
 	m_current_motion = "idle";
 	m_model_name = "";
-	m_userdata = nullptr;
+	m_userdata = NULL;
 	spatial.type |= STYPE_RENDERABLE;
 	LoadModel(model_name);
 	PlayMotion("idle", false);
@@ -342,7 +342,7 @@ AttachmentScriptLight* script_attachment::DetachLight()
 {
 	if (!m_script_light) return nullptr;
 	AttachmentScriptLight* ret = m_script_light;
-	m_script_light = nullptr;
+	m_script_light = NULL;
 	return ret;
 }
 
@@ -427,7 +427,7 @@ void script_attachment::SetParent(script_attachment* att)
 
 	spatial_unregister();
 	m_parent_level = false;
-	m_parent_object = nullptr;
+	m_parent_object = NULL;
 	m_parent_attachment = att;
 	m_parent_attachment->AddChild(GetName(), this);
 }
@@ -454,7 +454,7 @@ void script_attachment::SetParent(CGameObject* obj)
 	spatial_unregister();
 	m_parent_level = false;
 	m_parent_object = obj;
-	m_parent_attachment = nullptr;
+	m_parent_attachment = NULL;
 	m_parent_object->add_attachment(GetName(), this);
 }
 
@@ -480,7 +480,7 @@ void script_attachment::SetParent(CScriptGameObject* obj)
 	spatial_unregister();
 	m_parent_level = false;
 	m_parent_object = &obj->object();
-	m_parent_attachment = nullptr;
+	m_parent_attachment = NULL;
 	m_parent_object->add_attachment(GetName(), this);
 }
 
@@ -496,8 +496,8 @@ void script_attachment::SetParentLevel()
 		m_parent_object->remove_child(GetName());
 
 	m_parent_level = true;
-	m_parent_object = nullptr;
-	m_parent_attachment = nullptr;
+	m_parent_object = NULL;
+	m_parent_attachment = NULL;
 	Level().add_attachment(GetName(), this);
 	spatial_register();
 	spatial_move();
@@ -837,7 +837,7 @@ void script_attachment::SetUserdata(::luabind::object obj)
 	if (!obj || obj.type() == LUA_TNIL)
 	{
 		xr_delete(m_userdata);
-		m_userdata = nullptr;
+		m_userdata = NULL;
 		return;
 	}
 

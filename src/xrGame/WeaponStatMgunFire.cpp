@@ -618,7 +618,7 @@ void CWeaponStatMgun::ReloadMagazine()
 
 	if (!m_bLockType)
 	{
-		m_pCurrentAmmo = nullptr;
+		m_pCurrentAmmo = NULL;
 	}
 
 	if (is_consume_ammo)

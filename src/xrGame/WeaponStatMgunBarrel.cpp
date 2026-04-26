@@ -18,7 +18,7 @@ SStmBarrel::SStmBarrel(CWeaponStatMgun *stm, LPCSTR name)
     m_fire_dir.set(0, 0, 1);
     m_drop_bid = BI_NONE;
     m_bLightShotEnabled = true;
-    m_pFlameParticles = nullptr;
+    m_pFlameParticles = NULL;
 }
 
 SStmBarrel::~SStmBarrel()
@@ -27,7 +27,7 @@ SStmBarrel::~SStmBarrel()
 
 void SStmBarrel::reinit()
 {
-    m_pFlameParticles = nullptr;
+    m_pFlameParticles = NULL;
 }
 
 void SStmBarrel::Load(LPCSTR section)
@@ -170,7 +170,7 @@ void SStmBarrel::StopFlameParticles()
         return;
     m_pFlameParticles->SetAutoRemove(true);
     m_pFlameParticles->Stop();
-    m_pFlameParticles = nullptr;
+    m_pFlameParticles = NULL;
 }
 
 void SStmBarrel::UpdateFlameParticles()
@@ -189,7 +189,7 @@ void SStmBarrel::StartSmokeParticles(const Fvector &play_pos, const Fvector &par
 {
     if (0 == m_sSmokeParticles.size())
         return;
-    CParticlesObject *pSmokeParticles = nullptr;
+    CParticlesObject *pSmokeParticles = NULL;
     StartParticles(pSmokeParticles, m_sSmokeParticles.c_str(), play_pos, parent_vel, true);
 }
 

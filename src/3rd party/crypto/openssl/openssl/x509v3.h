@@ -335,7 +335,7 @@ DECLARE_ASN1_FUNCTIONS(PROXY_CERT_INFO_EXTENSION)
 
 #define X509V3_set_ctx_test(ctx) \
 			X509V3_set_ctx(ctx, NULL, NULL, NULL, NULL, CTX_TEST)
-#define X509V3_set_ctx_nodb(ctx) (ctx)->db = NULL;
+#define X509V3_set_ctx_nodb(ctx) (ctx)->db = nullptr;
 
 #define EXT_BITSTRING(nid, table) { nid, 0, ASN1_ITEM_ref(ASN1_BIT_STRING), \
 			0,0,0,0, \

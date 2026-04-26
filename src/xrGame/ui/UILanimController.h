@@ -52,7 +52,7 @@ public:
 			m_lanim_clr.m_lanim = LALib.FindItem(lanim);
 		else
 		{
-			m_lanim_clr.m_lanim = NULL;
+			m_lanim_clr.m_lanim = nullptr;
 			return;
 		}
 

@@ -69,7 +69,7 @@ static bool error_after_dialog = false;
 
 namespace crash_saving
 {
-    void (*save_impl)() = nullptr;
+    void (*save_impl)() = NULL;
 	BOOL enabled = TRUE;
 
     void save()

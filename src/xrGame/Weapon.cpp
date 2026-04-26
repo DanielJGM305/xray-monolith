@@ -3033,7 +3033,7 @@ bool CWeapon::unlimited_ammo()
 float CWeapon::GetMagazineWeight(const decltype(CWeapon::m_magazine)& mag) const
 {
 	float res = 0;
-	const char* last_type = nullptr;
+	const char* last_type = NULL;
 	float last_ammo_weight = 0;
 	for (auto& c : mag)
 	{

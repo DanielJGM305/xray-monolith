@@ -88,7 +88,7 @@ CWeaponStatMgun::CWeaponStatMgun()
 	m_reload_delay = 0.0F;
 	m_single_shot_wpn = FALSE;
 	m_unlimited_ammo = true;
-	m_reload_consume_callback = nullptr;
+	m_reload_consume_callback = NULL;
 	m_shot_effector._set("");
 
 	m_next_ammoType_on_reload.reset();
@@ -97,7 +97,7 @@ CWeaponStatMgun::CWeaponStatMgun()
 	iMagazineSize = 1;
 
 	fireDispersionOwnerScale = 1.0F;
-	m_on_before_use_callback = nullptr;
+	m_on_before_use_callback = NULL;
     m_on_range_fov_callback = "";
 #endif
 

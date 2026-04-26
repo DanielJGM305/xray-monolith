@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "r3.h"
 #include "../xrRender/fbasicvisual.h"
 #include "../../xrEngine/xr_object.h"
@@ -864,7 +864,7 @@ CRender::~CRender()
 	for (FSlideWindowItem it : SWIs)
 	{
 		xr_free(it.sw);
-		it.sw = nullptr;
+		it.sw = NULL;
 		it.count = 0;
 	}
 	SWIs.clear();

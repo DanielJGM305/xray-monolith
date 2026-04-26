@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "../xrphysics/PhysicsShell.h"
 #include "weaponammo.h"
@@ -173,7 +173,7 @@ protected:
 	virtual bool SOParentIsActor() { return ParentIsActor(); }
 	u8 last_idx;
 
-	CAnonHudItem* m_scopeItem = NULL;
+	CAnonHudItem* m_scopeItem = nullptr;
 public:
 	void signal_HideComplete();
 	virtual bool Action(u16 cmd, u32 flags);

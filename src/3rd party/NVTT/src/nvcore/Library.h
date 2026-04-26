@@ -34,7 +34,7 @@ public:
 	
 	bool isValid() const
 	{
-		return handle != NULL;
+		return handle != nullptr;
 	}
 	
 	void * bindSymbol(const char * symbol)

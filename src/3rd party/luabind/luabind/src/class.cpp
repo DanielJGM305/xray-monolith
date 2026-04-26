@@ -336,7 +336,7 @@ namespace luabind { namespace detail {
         }
 
         m->add_overload(std::move(o));
-        m->crep = nullptr;
+        m->crep = NULL;
     }
 
 #ifndef LUABIND_NO_ERROR_CHECKING

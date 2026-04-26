@@ -639,7 +639,7 @@ void CRenderTarget::phase_ssfx_sss_ext(light_Package& LP)
         for (int i = 0; i < 8; i++)
         {
             if (LightSlot[i] == l)
-                LightSlot[i] = nullptr;
+                LightSlot[i] = NULL;
         }
     };
 

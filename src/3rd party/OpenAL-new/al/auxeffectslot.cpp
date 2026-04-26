@@ -158,7 +158,7 @@ void AddActiveEffectSlots(const al::span<ALeffectslot*> auxslots, ALCcontext *co
         newarray = EffectSlot::CreatePtrArray(newcount);
         std::copy_n(curarray->begin(), newcount, newarray->begin());
         delete curarray;
-        curarray = nullptr;
+        curarray = NULL;
     }
     std::uninitialized_fill_n(newarray->end(), newcount, nullptr);
 
@@ -197,7 +197,7 @@ void RemoveActiveEffectSlots(const al::span<ALeffectslot*> auxslots, ALCcontext 
         std::copy_n(curarray->begin(), newsize, newarray->begin());
 
         delete curarray;
-        curarray = nullptr;
+        curarray = NULL;
     }
     std::uninitialized_fill_n(newarray->end(), newsize, nullptr);
 
@@ -910,10 +910,10 @@ ALeffectslot::~ALeffectslot()
 {
     if(Target)
         DecrementRef(Target->ref);
-    Target = nullptr;
+    Target = NULL;
     if(Buffer)
         DecrementRef(Buffer->ref);
-    Buffer = nullptr;
+    Buffer = NULL;
 
     if(EffectSlotProps *props{mSlot->Update.exchange(nullptr)})
     {
@@ -922,7 +922,7 @@ ALeffectslot::~ALeffectslot()
         delete props;
     }
 
-    mSlot->mEffectState = nullptr;
+    mSlot->mEffectState = NULL;
     mSlot->InUse = false;
 }
 
@@ -960,7 +960,7 @@ ALenum ALeffectslot::initEffect(ALenum effectType, const EffectProps &effectProp
     EffectSlotProps *props{context->mFreeEffectslotProps.load()};
     while(props)
     {
-        props->State = nullptr;
+        props->State = NULL;
         props = props->next.load(std::memory_order_relaxed);
     }
 
@@ -998,7 +998,7 @@ void ALeffectslot::updateProps(ALCcontext *context)
         /* If there was an unused update container, put it back in the
          * freelist.
          */
-        props->State = nullptr;
+        props->State = NULL;
         AtomicReplaceHead(context->mFreeEffectslotProps, props);
     }
 }
@@ -1032,7 +1032,7 @@ EffectSlotSubList::~EffectSlotSubList()
     }
     FreeMask = ~usemask;
     al_free(EffectSlots);
-    EffectSlots = nullptr;
+    EffectSlots = NULL;
 }
 
 #ifdef ALSOFT_EAX

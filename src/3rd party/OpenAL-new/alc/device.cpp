@@ -32,7 +32,7 @@ ALCdevice::~ALCdevice()
 {
     TRACE("Freeing device %p\n", voidp{this});
 
-    Backend = nullptr;
+    Backend = NULL;
 
     size_t count{std::accumulate(BufferList.cbegin(), BufferList.cend(), size_t{0u},
         [](size_t cur, const BufferSubList &sublist) noexcept -> size_t

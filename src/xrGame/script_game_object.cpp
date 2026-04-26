@@ -71,7 +71,7 @@ Fvector CScriptGameObject::Center(bool bHud)
 
 Fmatrix CScriptGameObject::Xform(bool bHud)
 {
-	Fmatrix* xform = nullptr;
+	Fmatrix* xform = NULL;
 
 	if (bHud)
 	{
@@ -386,7 +386,7 @@ u32 CScriptGameObject::get_current_patrol_point_index()
 
 u16 CScriptGameObject::bone_id(LPCSTR bone_name, bool bHud)
 {
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	if (bHud)
 	{
@@ -413,8 +413,8 @@ Fmatrix CScriptGameObject::bone_transform(u16 bone_id, bool bHud)
 {
 	//if (bone_id == BI_NONE) return Fvector().set(0, 0, 0);
 
-	IKinematics* k = nullptr;
-	Fmatrix* xform = nullptr;
+	IKinematics* k = NULL;
+	Fmatrix* xform = NULL;
 
 	if (bHud)
 	{
@@ -465,7 +465,7 @@ Fvector CScriptGameObject::bone_direction(u16 bone_id, bool bHud)
 
 u16 CScriptGameObject::bone_parent(u16 bone_id, bool bHud)
 {
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	if (bHud)
 	{
@@ -490,7 +490,7 @@ LPCSTR CScriptGameObject::bone_name(u16 bone_id, bool bHud)
 {
 	if (bone_id == BI_NONE) return "";
 
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	if (bHud)
 	{
@@ -513,7 +513,7 @@ void CScriptGameObject::set_bone_visible(u16 bone_id, bool bVisibility, bool bRe
 {
 	if (bone_id == BI_NONE) return;
 
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	if (bHud)
 	{
@@ -538,7 +538,7 @@ bool CScriptGameObject::is_bone_visible(u16 bone_id, bool bHud)
 {
 	if (bone_id == BI_NONE) return false;
 
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	if (bHud)
 	{
@@ -561,7 +561,7 @@ bool CScriptGameObject::is_bone_visible(u16 bone_id, bool bHud)
 ::luabind::object CScriptGameObject::list_bones(bool bHud)
 {
 	::luabind::object result = ::luabind::newtable(ai().script_engine().lua());
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	if (bHud)
 	{
@@ -1195,7 +1195,7 @@ CGameObject& CScriptGameObject::object() const
 // Shader / Textures Magic
 ::luabind::object CScriptGameObject::GetShaders(bool bHud)
 {
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	if (bHud)
 	{
@@ -1252,7 +1252,7 @@ CGameObject& CScriptGameObject::object() const
 
 ::luabind::object CScriptGameObject::GetDefaultShaders(bool bHud)
 {
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	if (bHud)
 	{
@@ -1385,7 +1385,7 @@ void reset_shader_tex(IRenderVisual* vis, int id)
 
 void CScriptGameObject::SetShaderTexture(int id, LPCSTR shader, LPCSTR texture, bool bHud)
 {
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	if (bHud)
 	{
@@ -1411,7 +1411,7 @@ void CScriptGameObject::SetShaderTexture(int id, LPCSTR shader, LPCSTR texture, 
 
 void CScriptGameObject::ResetShaderTexture(int id, bool bHud)
 {
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	if (bHud)
 	{

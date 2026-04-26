@@ -84,7 +84,7 @@ void AABBTreeNode::destroy(AABBTreeBuilder* _tree)
 		mN->destroy(_tree);
 		_tree->node_destroy(mN);
 	}
-	mNodePrimitives = null; // This was just a shortcut to the global list => no release
+	mNodePrimitives = NULL; // This was just a shortcut to the global list => no release
 	mNbPrimitives = 0;
 }
 

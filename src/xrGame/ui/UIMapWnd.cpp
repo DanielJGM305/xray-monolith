@@ -573,7 +573,7 @@ void CUIMapWnd::ActivatePropertiesBox(CUIWindow* w)
 {
 	m_UIPropertiesBox->RemoveAll();
 	::luabind::functor<void> funct;
-	CMapSpot* sp = nullptr;
+	CMapSpot* sp = NULL;
 	if (ai().script_engine().functor("pda.property_box_add_properties", funct))
 	{
 		sp = smart_cast<CMapSpot*>(w);

@@ -938,8 +938,8 @@ void aluInitRenderer(ALCdevice *device, int hrtf_id, al::optional<StereoEncoding
     /* Hold the HRTF the device last used, in case it's used again. */
     HrtfStorePtr old_hrtf{std::move(device->mHrtf)};
 
-    device->mHrtfState = nullptr;
-    device->mHrtf = nullptr;
+    device->mHrtfState = NULL;
+    device->mHrtf = NULL;
     device->mIrSize = 0;
     device->mHrtfName.clear();
     device->mXOverFreq = 400.0f;
@@ -948,7 +948,7 @@ void aluInitRenderer(ALCdevice *device, int hrtf_id, al::optional<StereoEncoding
 
     if(device->FmtChans != DevFmtStereo)
     {
-        old_hrtf = nullptr;
+        old_hrtf = NULL;
         if(stereomode && *stereomode == StereoEncoding::Hrtf)
             device->mHrtfStatus = ALC_HRTF_UNSUPPORTED_FORMAT_SOFT;
 
@@ -1072,7 +1072,7 @@ void aluInitRenderer(ALCdevice *device, int hrtf_id, al::optional<StereoEncoding
 
         if(device->mHrtf)
         {
-            old_hrtf = nullptr;
+            old_hrtf = NULL;
 
             HrtfStore *hrtf{device->mHrtf.get()};
             device->mIrSize = hrtf->mIrSize;
@@ -1088,7 +1088,7 @@ void aluInitRenderer(ALCdevice *device, int hrtf_id, al::optional<StereoEncoding
             return;
         }
     }
-    old_hrtf = nullptr;
+    old_hrtf = NULL;
 
     if(stereomode.value_or(StereoEncoding::Default) == StereoEncoding::Uhj)
     {

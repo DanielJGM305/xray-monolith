@@ -96,7 +96,7 @@ void CObject::cNameVisual_set(shared_str N)
 			new_k->spatialParent = this;
 
 		if (old_k)
-			old_k->spatialParent = nullptr;
+			old_k->spatialParent = NULL;
 #endif
 
 		if (old_k && new_k)
@@ -115,7 +115,7 @@ void CObject::cNameVisual_set(shared_str N)
 		{
 			IKinematics* new_k = renderable.visual->dcast_PKinematics();
 			if (new_k)
-				new_k->spatialParent = nullptr;
+				new_k->spatialParent = NULL;
 		}
 #endif
 

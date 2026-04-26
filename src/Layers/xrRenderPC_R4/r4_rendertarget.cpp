@@ -398,8 +398,8 @@ CRenderTarget::CRenderTarget()
 	}
 	else
 	{
-		b_bloom_msaa = nullptr;
-		b_postprocess_msaa = nullptr;
+		b_bloom_msaa = NULL;
+		b_postprocess_msaa = NULL;
 	}
 	b_luminance = xr_new<CBlender_luminance>();
 	b_combine = xr_new<CBlender_combine>();

@@ -285,7 +285,7 @@ START_API_FUNC
 
     /* First try to find any effects that are invalid. */
     auto validate_effect = [device](const ALuint eid) -> bool
-    { return !eid || LookupEffect(device, eid) != nullptr; };
+    { return !eid || LookupEffect(device, eid) != NULL; };
 
     const ALuint *effects_end = effects + n;
     auto inveffect = std::find_if_not(effects, effects_end, validate_effect);
@@ -557,7 +557,7 @@ EffectSubList::~EffectSubList()
     }
     FreeMask = ~usemask;
     al_free(Effects);
-    Effects = nullptr;
+    Effects = NULL;
 }
 
 

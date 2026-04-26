@@ -21,7 +21,7 @@ Result Core::Create(ClientId clientId, std::uint64_t flags, Core** instance)
     DiscordCreateParamsSetDefault(&params);
     params.client_id = clientId;
     params.flags = flags;
-    params.events = nullptr;
+    params.events = NULL;
     params.event_data = *instance;
     params.user_events = &UserManager::events_;
     params.activity_events = &ActivityManager::events_;
@@ -35,7 +35,7 @@ Result Core::Create(ClientId clientId, std::uint64_t flags, Core** instance)
     auto result = DiscordCreate(DISCORD_VERSION, &params, &((*instance)->internal_));
     if (result != DiscordResult_Ok || !(*instance)->internal_) {
         delete (*instance);
-        (*instance) = nullptr;
+        (*instance) = NULL;
     }
 
     return static_cast<Result>(result);
@@ -45,7 +45,7 @@ Core::~Core()
 {
     if (internal_) {
         internal_->destroy(internal_);
-        internal_ = nullptr;
+        internal_ = NULL;
     }
 }
 

@@ -56,7 +56,7 @@ static void free_devices_token()
 	for (int i = 0; snd_devices_token[i].name; i++)
 		xr_free(snd_devices_token[i].name);
 	xr_free(snd_devices_token);
-	snd_devices_token = nullptr;
+	snd_devices_token = NULL;
 }
 
 /*
@@ -148,7 +148,7 @@ void ALDeviceList::Enumerate()
 	u32 _cnt = GetNumDevices();
 	snd_devices_token = xr_alloc<xr_token>(_cnt + 1);
 	snd_devices_token[_cnt].id = -1;
-	snd_devices_token[_cnt].name = nullptr;
+	snd_devices_token[_cnt].name = NULL;
 	for (u32 i = 0; i < _cnt; ++i)
 	{
 		snd_devices_token[i].id = i;

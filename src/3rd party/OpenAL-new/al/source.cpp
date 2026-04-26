@@ -2789,7 +2789,7 @@ void StartSources(ALCcontext *const context, const al::span<ALsource*> srchandle
          * length buffer.
          */
         auto find_buffer = [](ALbufferQueueItem &entry) noexcept
-        { return entry.mSampleLen != 0 || entry.mCallback != nullptr; };
+        { return entry.mSampleLen != 0 || entry.mCallback != NULL; };
         auto BufferList = std::find_if(source->mQueue.begin(), source->mQueue.end(), find_buffer);
 
         /* If there's nothing to play, go right to stopped. */
@@ -2820,7 +2820,7 @@ void StartSources(ALCcontext *const context, const al::span<ALsource*> srchandle
             /* A source that's paused simply resumes. If there's no voice, it
              * was lost from a disconnect, so just start over with a new one.
              */
-            cur->mOldVoice = nullptr;
+            cur->mOldVoice = NULL;
             if(!voice) break;
             cur->mVoice = voice;
             cur->mSourceID = source->id;
@@ -2840,12 +2840,12 @@ void StartSources(ALCcontext *const context, const al::span<ALsource*> srchandle
             if(voice)
                 voice->mPendingChange.store(true, std::memory_order_relaxed);
             cur->mOldVoice = voice;
-            voice = nullptr;
+            voice = NULL;
             break;
 
         default:
             assert(voice == nullptr);
-            cur->mOldVoice = nullptr;
+            cur->mOldVoice = NULL;
 #ifdef ALSOFT_EAX
             if(context->hasEax())
                 source->eaxCommit();
@@ -2969,7 +2969,7 @@ START_API_FUNC
 
     /* Check that all Sources are valid */
     auto validate_source = [&context](const ALuint sid) -> bool
-    { return LookupSource(context.get(), sid) != nullptr; };
+    { return LookupSource(context.get(), sid) != NULL; };
 
     const ALuint *sources_end = sources + n;
     auto invsrc = std::find_if_not(sources, sources_end, validate_source);
@@ -3988,7 +3988,7 @@ ALsource::ALsource()
     Direct.LFReference = HIGHPASSFREQREF;
     for(auto &send : Send)
     {
-        send.Slot = nullptr;
+        send.Slot = NULL;
         send.Gain = 1.0f;
         send.GainHF = 1.0f;
         send.HFReference = LOWPASSFREQREF;
@@ -4039,7 +4039,7 @@ SourceSubList::~SourceSubList()
     }
     FreeMask = ~usemask;
     al_free(Sources);
-    Sources = nullptr;
+    Sources = NULL;
 }
 
 

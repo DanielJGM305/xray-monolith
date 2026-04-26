@@ -27,8 +27,8 @@ int psSoundCacheSizeMB = 256;
 
 float snd_efx_environment_change_time = 1.66f;
 
-CSoundRender_Core* SoundRender = nullptr;
-CSound_manager_interface* Sound = nullptr;
+CSoundRender_Core* SoundRender = NULL;
+CSound_manager_interface* Sound = NULL;
 
 CSoundRender_Core::CSoundRender_Core()
 {
@@ -505,7 +505,7 @@ void CSoundRender_Core::object_relcase(CObject* obj)
 	if (obj) {
 		for (u32 eit = 0; eit < s_emitters.size(); eit++) {
 			if (s_emitters[eit] && s_emitters[eit]->owner_data && (obj == s_emitters[eit]->owner_data->g_object))
-				s_emitters[eit]->owner_data->g_object = nullptr;
+				s_emitters[eit]->owner_data->g_object = NULL;
 		}
 	}
 }

@@ -20,7 +20,7 @@ void player_legs_controller::destroy()
     if (v)
         ::Render->model_Delete(v);
 
-    m_model = nullptr;
+    m_model = NULL;
     m_visual_name = "";
 }
 

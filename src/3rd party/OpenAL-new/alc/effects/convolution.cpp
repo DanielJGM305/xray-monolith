@@ -262,8 +262,8 @@ void ConvolutionState::deviceUpdate(const DeviceBase *device, const BufferStorag
     mCurrentSegment = 0;
     mNumConvolveSegs = 0;
 
-    mChans = nullptr;
-    mComplexData = nullptr;
+    mChans = NULL;
+    mComplexData = NULL;
 
     /* An empty buffer doesn't need a convolution filter. */
     if(!buffer || buffer->mSampleLen < 1) return;

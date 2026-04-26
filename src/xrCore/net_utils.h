@@ -232,7 +232,7 @@ public:
 		else
 		{
 			IIniFileStream* tmp = inistream;
-			inistream = NULL;
+			inistream = nullptr;
 			w_u8(0);
 			inistream = tmp; //hack -(
 		}

@@ -61,7 +61,7 @@ namespace luabind { namespace detail {
         if (!m_chain) 
         {
             m_chain = s.m_chain;
-            s.m_chain = nullptr;
+            s.m_chain = NULL;
             return std::move(*this);
         }
         
@@ -70,7 +70,7 @@ namespace luabind { namespace detail {
             if (!c->m_next)
             {
                 c->m_next = s.m_chain;
-                s.m_chain = nullptr;
+                s.m_chain = NULL;
                 break;
             }
         }
@@ -80,7 +80,7 @@ namespace luabind { namespace detail {
 
     void scope::register_(lua_State* L) const
     {
-        for (detail::registration* r = m_chain; r != nullptr; r = r->m_next)
+        for (detail::registration* r = m_chain; r != NULL; r = r->m_next)
         {
             r->register_(L);
         }

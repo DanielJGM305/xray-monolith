@@ -7,12 +7,12 @@
 
 CAviPlayerCustom::CAviPlayerCustom()
 {
-	alpha = nullptr;
+	alpha = NULL;
 
-	m_pMovieIndex = nullptr;
-	m_pMovieData = nullptr;
-	m_aviIC = nullptr;
-	m_pDecompressedBuf = nullptr;
+	m_pMovieIndex = NULL;
+	m_pMovieData = NULL;
+	m_aviIC = NULL;
+	m_pDecompressedBuf = NULL;
 
 	ZeroMemory(&m_biOutFormat, sizeof(BITMAPINFOHEADER));
 	ZeroMemory(&m_biInFormat, sizeof(BITMAPINFOHEADER));

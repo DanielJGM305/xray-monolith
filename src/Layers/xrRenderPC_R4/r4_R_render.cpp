@@ -691,7 +691,7 @@ void CRender::render_Reticle()
 
 void CRender::RenderToTarget(RRT target)
 {
-	ref_rt* RT = nullptr;
+	ref_rt* RT = NULL;
 
 	switch (target)
 	{
@@ -706,7 +706,7 @@ void CRender::RenderToTarget(RRT target)
 		break;
 	}
 
-	ID3DTexture2D* pBuffer = nullptr;
+	ID3DTexture2D* pBuffer = NULL;
 	HW.m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBuffer);
 	HW.pContext->CopyResource((*RT)->pSurface, pBuffer);
 	pBuffer->Release();

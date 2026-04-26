@@ -198,7 +198,7 @@ public:
 		skip_input_data = SkipInputData;
 		resync_to_restart = jpeg_resync_to_restart; // use default method
 		term_source = TermSource;
-		next_input_byte = NULL; //* => next byte to read from buffer 
+		next_input_byte = nullptr; //* => next byte to read from buffer 
 		bytes_in_buffer = 0;	//* # of bytes remaining in buffer 
 
 		m_pBuffer = new unsigned char[eBufSize];

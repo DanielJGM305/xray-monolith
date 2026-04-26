@@ -258,7 +258,7 @@ namespace nv
 		bool isEmpty() const { return m_size == 0; }
 	
 		/// Is a null vector.
-		bool isNull() const	{ return m_buffer == NULL; }
+		bool isNull() const	{ return m_buffer == nullptr; }
 	
 	
 		/// Push an element at the end of the vector.
@@ -590,7 +590,7 @@ namespace nv
 			if( m_buffer_size == 0 ) {
 				if( m_buffer ) {
 					mem::free( m_buffer );
-					m_buffer = NULL;
+					m_buffer = nullptr;
 				}
 			}
 			
@@ -779,7 +779,7 @@ namespace nv
 					}
 				}
 				mem::free(table);
-				table = NULL;
+				table = nullptr;
 				entry_count = 0;
 				size_mask = -1;
 			}
@@ -1035,7 +1035,7 @@ namespace nv
 			table = new_hash.table;
 			new_hash.entry_count = 0;
 			new_hash.size_mask = -1;
-			new_hash.table = NULL;
+			new_hash.table = nullptr;
 		}
 	
 		// Move the enumerator to the next valid element.

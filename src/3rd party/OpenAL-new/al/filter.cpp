@@ -456,7 +456,7 @@ START_API_FUNC
 
     /* First try to find any filters that are invalid. */
     auto validate_filter = [device](const ALuint fid) -> bool
-    { return !fid || LookupFilter(device, fid) != nullptr; };
+    { return !fid || LookupFilter(device, fid) != NULL; };
 
     const ALuint *filters_end = filters + n;
     auto invflt = std::find_if_not(filters, filters_end, validate_filter);
@@ -718,5 +718,5 @@ FilterSubList::~FilterSubList()
     }
     FreeMask = ~usemask;
     al_free(Filters);
-    Filters = nullptr;
+    Filters = NULL;
 }

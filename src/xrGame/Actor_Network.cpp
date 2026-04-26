@@ -772,7 +772,7 @@ void CActor::net_Destroy()
 		destroy_physics_shell(actor_camera_shell);
 
 	// demonized: disable crash saving when actor is destroyed
-	crash_saving::save_impl = nullptr;
+	crash_saving::save_impl = NULL;
 }
 
 void CActor::net_Relcase(CObject* O)

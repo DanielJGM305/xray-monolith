@@ -106,7 +106,7 @@ CGamePersistent::CGamePersistent(void)
 	Fvector3* DofValue = Console->GetFVectorPtr("r2_dof");
 	SetBaseDof(*DofValue);
 
-	m_pWallmarksManager = nullptr;
+	m_pWallmarksManager = NULL;
 }
 
 CGamePersistent::~CGamePersistent(void)

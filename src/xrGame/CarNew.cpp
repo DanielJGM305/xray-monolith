@@ -519,8 +519,8 @@ void CCar::Fly_OnKeyboardHold(int dik)
 CCar::SCarFlyBone::SCarFlyBone()
 {
 	bid = BI_NONE;
-	E = nullptr;
-	J = nullptr;
+	E = NULL;
+	J = NULL;
 	clockwise = false;
 	axis = 0;
 	spinning = false;

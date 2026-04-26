@@ -195,14 +195,14 @@ struct DSoundPlayback final : public BackendBase {
 
 DSoundPlayback::~DSoundPlayback()
 {
-    mNotifies = nullptr;
-    mBuffer = nullptr;
-    mPrimaryBuffer = nullptr;
-    mDS = nullptr;
+    mNotifies = NULL;
+    mBuffer = NULL;
+    mPrimaryBuffer = NULL;
+    mDS = NULL;
 
     if(mNotifyEvent)
         CloseHandle(mNotifyEvent);
-    mNotifyEvent = nullptr;
+    mNotifyEvent = NULL;
 }
 
 
@@ -354,9 +354,9 @@ void DSoundPlayback::open(const char *name)
         throw al::backend_exception{al::backend_error::DeviceError, "Device init failed: 0x%08lx",
             hr};
 
-    mNotifies = nullptr;
-    mBuffer = nullptr;
-    mPrimaryBuffer = nullptr;
+    mNotifies = NULL;
+    mBuffer = NULL;
+    mPrimaryBuffer = NULL;
     mDS = std::move(ds);
 
     mDevice->DeviceName = name;
@@ -364,9 +364,9 @@ void DSoundPlayback::open(const char *name)
 
 bool DSoundPlayback::reset()
 {
-    mNotifies = nullptr;
-    mBuffer = nullptr;
-    mPrimaryBuffer = nullptr;
+    mNotifies = NULL;
+    mBuffer = NULL;
+    mPrimaryBuffer = NULL;
 
     switch(mDevice->FmtType)
     {
@@ -451,7 +451,7 @@ retry_open:
         else
             OutputType.SubFormat = KSDATAFORMAT_SUBTYPE_PCM;
 
-        mPrimaryBuffer = nullptr;
+        mPrimaryBuffer = NULL;
     }
     else
     {
@@ -512,9 +512,9 @@ retry_open:
 
     if(FAILED(hr))
     {
-        mNotifies = nullptr;
-        mBuffer = nullptr;
-        mPrimaryBuffer = nullptr;
+        mNotifies = NULL;
+        mBuffer = NULL;
+        mPrimaryBuffer = NULL;
         return false;
     }
 
@@ -571,9 +571,9 @@ DSoundCapture::~DSoundCapture()
     if(mDSCbuffer)
     {
         mDSCbuffer->Stop();
-        mDSCbuffer = nullptr;
+        mDSCbuffer = NULL;
     }
-    mDSC = nullptr;
+    mDSC = NULL;
 }
 
 
@@ -687,9 +687,9 @@ void DSoundCapture::open(const char *name)
 
     if(FAILED(hr))
     {
-        mRing = nullptr;
-        mDSCbuffer = nullptr;
-        mDSC = nullptr;
+        mRing = NULL;
+        mDSCbuffer = NULL;
+        mDSC = NULL;
 
         throw al::backend_exception{al::backend_error::DeviceError, "Device init failed: 0x%08lx",
             hr};
@@ -785,7 +785,7 @@ bool DSoundBackendFactory::init()
     if(!p##f)                                                                 \
     {                                                                         \
         CloseLib(ds_handle);                                                  \
-        ds_handle = nullptr;                                                  \
+        ds_handle = NULL;                                                  \
         return false;                                                         \
     }                                                                         \
 } while(0)

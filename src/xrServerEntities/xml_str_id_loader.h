@@ -73,12 +73,12 @@ public:
 
 
 TEMPLATE_SPECIALIZATION
-typename T_VECTOR* CSXML_IdToIndex::m_pItemDataVector = NULL;
+typename T_VECTOR* CSXML_IdToIndex::m_pItemDataVector = nullptr;
 
 TEMPLATE_SPECIALIZATION
-LPCSTR CSXML_IdToIndex::file_str = NULL;
+LPCSTR CSXML_IdToIndex::file_str = nullptr;
 TEMPLATE_SPECIALIZATION
-LPCSTR CSXML_IdToIndex::tag_name = NULL;
+LPCSTR CSXML_IdToIndex::tag_name = nullptr;
 
 
 TEMPLATE_SPECIALIZATION

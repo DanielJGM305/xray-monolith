@@ -182,7 +182,7 @@ struct IReaderBase_Test;
 struct XRCORE_API IReaderTestPolicy
 {
     IReaderBase_Test* m_test;
-    IReaderTestPolicy() { m_test = NULL; }
+    IReaderTestPolicy() { m_test = nullptr; }
     ~IReaderTestPolicy(); // defined in FS.cpp
 };
 #endif // TESTING_IREADER

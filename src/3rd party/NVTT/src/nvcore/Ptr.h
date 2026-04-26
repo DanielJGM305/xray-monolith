@@ -38,7 +38,7 @@ public:
 	/** Dtor. Deletes owned pointer. */
 	~AutoPtr() {
 		delete m_ptr;
-		m_ptr = NULL;
+		m_ptr = nullptr;
 	}
 
 	/** Delete owned pointer and assign new one. */
@@ -68,7 +68,7 @@ public:
 	/** Relinquish ownership of the underlying pointer and returns that pointer. */
 	T * release() {
 		T * tmp = m_ptr;
-		m_ptr = NULL;
+		m_ptr = nullptr;
 		return tmp;
 	}
 	
@@ -162,7 +162,7 @@ public:
 		if (m_weak_proxy != NULL) {
 			m_weak_proxy->NotifyObjectDied();
 			m_weak_proxy->Release();
-			m_weak_proxy = NULL;
+			m_weak_proxy = nullptr;
 		}
 	}
 

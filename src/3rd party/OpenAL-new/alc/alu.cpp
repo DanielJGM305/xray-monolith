@@ -451,7 +451,7 @@ bool CalcEffectSlotParams(EffectSlot *slot, EffectSlot **sorted_slots, ContextBa
      * a re-sort.
      */
     if(slot->Target != props->Target)
-        *sorted_slots = nullptr;
+        *sorted_slots = NULL;
     slot->Gain = props->Gain;
     slot->AuxSendAuto = props->AuxSendAuto;
     slot->Target = props->Target;
@@ -1340,7 +1340,7 @@ void CalcNonAttnSourceParams(Voice *voice, const VoiceProps *props, const Contex
         SendSlots[i] = props->Send[i].Slot;
         if(!SendSlots[i] || SendSlots[i]->EffectType == EffectSlotType::None)
         {
-            SendSlots[i] = nullptr;
+            SendSlots[i] = NULL;
             voice->mSend[i].Buffer = {};
         }
         else
@@ -1388,7 +1388,7 @@ void CalcAttnSourceParams(Voice *voice, const VoiceProps *props, const ContextBa
     {
         SendSlots[i] = props->Send[i].Slot;
         if(!SendSlots[i] || SendSlots[i]->EffectType == EffectSlotType::None)
-            SendSlots[i] = nullptr;
+            SendSlots[i] = NULL;
         else if(!SendSlots[i]->AuxSendAuto)
         {
             /* If the slot's auxiliary send auto is off, the data sent to the
@@ -1894,7 +1894,7 @@ void ProcessContexts(DeviceBase *device, const uint SamplesToDo)
                 std::copy(slots, slots_end, sorted_slots.begin());
                 auto split_point = std::partition(sorted_slots.begin(), sorted_slots.end(),
                     [](const EffectSlot *slot) noexcept -> bool
-                    { return slot->Target != nullptr; });
+                    { return slot->Target != NULL; });
                 /* There must be at least one slot without a slot target. */
                 assert(split_point != sorted_slots.end());
 

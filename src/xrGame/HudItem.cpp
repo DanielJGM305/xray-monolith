@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "HudItem.h"
 #include "physic_item.h"
 #include "actor.h"
@@ -43,9 +43,9 @@ CHudItem::CHudItem()
 	m_nearwall_factor = 0.f;
 	m_lastState = eHidden;
 
-	script_ui = nullptr;
-	script_ui_funct = nullptr;
-	script_ui_bone = nullptr;
+	script_ui = NULL;
+	script_ui_funct = NULL;
+	script_ui_bone = NULL;
 	script_ui_matrix.identity();
 }
 
@@ -68,7 +68,7 @@ CHudItem::~CHudItem()
 void CHudItem::DeleteHudItemData()
 {
 	xr_delete(m_attachable);
-	m_attachable = nullptr;
+	m_attachable = NULL;
 }
 
 void CHudItem::Load(LPCSTR section)
@@ -960,7 +960,7 @@ bool CHudItem::IsAttachedToHUD()
 	if (!g_player_hud)
 		return false;
 
-	attachable_hud_item* hi = nullptr;
+	attachable_hud_item* hi = NULL;
 	
 	hi = g_player_hud->attached_item(0);
 	if (hi && hi->m_parent_hud_item == this)

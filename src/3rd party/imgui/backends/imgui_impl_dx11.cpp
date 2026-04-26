@@ -162,7 +162,7 @@ void ImGui_ImplDX11_RenderDrawData(ImDrawData* draw_data)
     // Create and grow vertex/index buffers if needed
     if (!bd->pVB || bd->VertexBufferSize < draw_data->TotalVtxCount)
     {
-        if (bd->pVB) { bd->pVB->Release(); bd->pVB = nullptr; }
+        if (bd->pVB) { bd->pVB->Release(); bd->pVB = NULL; }
         bd->VertexBufferSize = draw_data->TotalVtxCount + 5000;
         D3D11_BUFFER_DESC desc;
         memset(&desc, 0, sizeof(D3D11_BUFFER_DESC));
@@ -176,7 +176,7 @@ void ImGui_ImplDX11_RenderDrawData(ImDrawData* draw_data)
     }
     if (!bd->pIB || bd->IndexBufferSize < draw_data->TotalIdxCount)
     {
-        if (bd->pIB) { bd->pIB->Release(); bd->pIB = nullptr; }
+        if (bd->pIB) { bd->pIB->Release(); bd->pIB = NULL; }
         bd->IndexBufferSize = draw_data->TotalIdxCount + 10000;
         D3D11_BUFFER_DESC desc;
         memset(&desc, 0, sizeof(D3D11_BUFFER_DESC));
@@ -305,7 +305,7 @@ void ImGui_ImplDX11_RenderDrawData(ImDrawData* draw_data)
         global_idx_offset += draw_list->IdxBuffer.Size;
         global_vtx_offset += draw_list->VtxBuffer.Size;
     }
-    platform_io.Renderer_RenderState = nullptr;
+    platform_io.Renderer_RenderState = NULL;
 
     // Restore modified DX state
     device->RSSetScissorRects(old.ScissorRectsCount, old.ScissorRects);
@@ -350,7 +350,7 @@ static void ImGui_ImplDX11_CreateFontsTexture()
         desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
         desc.CPUAccessFlags = 0;
 
-        ID3D11Texture2D* pTexture = nullptr;
+        ID3D11Texture2D* pTexture = NULL;
         D3D11_SUBRESOURCE_DATA subResource;
         subResource.pSysMem = pixels;
         subResource.SysMemPitch = desc.Width * 4;
@@ -379,7 +379,7 @@ static void ImGui_ImplDX11_DestroyFontsTexture()
     if (bd->pFontTextureView)
     {
         bd->pFontTextureView->Release();
-        bd->pFontTextureView = nullptr;
+        bd->pFontTextureView = NULL;
         ImGui::GetIO().Fonts->SetTexID(0); // We copied data->pFontTextureView to io.Fonts->TexID so let's clear that as well.
     }
 }
@@ -562,16 +562,16 @@ void    ImGui_ImplDX11_InvalidateDeviceObjects()
 
     ImGui_ImplDX11_DestroyFontsTexture();
 
-    if (bd->pFontSampler)           { bd->pFontSampler->Release(); bd->pFontSampler = nullptr; }
-    if (bd->pIB)                    { bd->pIB->Release(); bd->pIB = nullptr; }
-    if (bd->pVB)                    { bd->pVB->Release(); bd->pVB = nullptr; }
-    if (bd->pBlendState)            { bd->pBlendState->Release(); bd->pBlendState = nullptr; }
-    if (bd->pDepthStencilState)     { bd->pDepthStencilState->Release(); bd->pDepthStencilState = nullptr; }
-    if (bd->pRasterizerState)       { bd->pRasterizerState->Release(); bd->pRasterizerState = nullptr; }
-    if (bd->pPixelShader)           { bd->pPixelShader->Release(); bd->pPixelShader = nullptr; }
-    if (bd->pVertexConstantBuffer)  { bd->pVertexConstantBuffer->Release(); bd->pVertexConstantBuffer = nullptr; }
-    if (bd->pInputLayout)           { bd->pInputLayout->Release(); bd->pInputLayout = nullptr; }
-    if (bd->pVertexShader)          { bd->pVertexShader->Release(); bd->pVertexShader = nullptr; }
+    if (bd->pFontSampler)           { bd->pFontSampler->Release(); bd->pFontSampler = NULL; }
+    if (bd->pIB)                    { bd->pIB->Release(); bd->pIB = NULL; }
+    if (bd->pVB)                    { bd->pVB->Release(); bd->pVB = NULL; }
+    if (bd->pBlendState)            { bd->pBlendState->Release(); bd->pBlendState = NULL; }
+    if (bd->pDepthStencilState)     { bd->pDepthStencilState->Release(); bd->pDepthStencilState = NULL; }
+    if (bd->pRasterizerState)       { bd->pRasterizerState->Release(); bd->pRasterizerState = NULL; }
+    if (bd->pPixelShader)           { bd->pPixelShader->Release(); bd->pPixelShader = NULL; }
+    if (bd->pVertexConstantBuffer)  { bd->pVertexConstantBuffer->Release(); bd->pVertexConstantBuffer = NULL; }
+    if (bd->pInputLayout)           { bd->pInputLayout->Release(); bd->pInputLayout = NULL; }
+    if (bd->pVertexShader)          { bd->pVertexShader->Release(); bd->pVertexShader = NULL; }
 }
 
 bool    ImGui_ImplDX11_Init(ID3D11Device* device, ID3D11DeviceContext* device_context)
@@ -588,9 +588,9 @@ bool    ImGui_ImplDX11_Init(ID3D11Device* device, ID3D11DeviceContext* device_co
     io.BackendFlags |= ImGuiBackendFlags_RendererHasViewports;  // We can create multi-viewports on the Renderer side (optional)
 
     // Get factory from device
-    IDXGIDevice* pDXGIDevice = nullptr;
-    IDXGIAdapter* pDXGIAdapter = nullptr;
-    IDXGIFactory* pFactory = nullptr;
+    IDXGIDevice* pDXGIDevice = NULL;
+    IDXGIAdapter* pDXGIAdapter = NULL;
+    IDXGIFactory* pFactory = NULL;
 
     if (device->QueryInterface(IID_PPV_ARGS(&pDXGIDevice)) == S_OK)
         if (pDXGIDevice->GetParent(IID_PPV_ARGS(&pDXGIAdapter)) == S_OK)
@@ -621,8 +621,8 @@ void ImGui_ImplDX11_Shutdown()
     if (bd->pFactory)             { bd->pFactory->Release(); }
     if (bd->pd3dDevice)           { bd->pd3dDevice->Release(); }
     if (bd->pd3dDeviceContext)    { bd->pd3dDeviceContext->Release(); }
-    io.BackendRendererName = nullptr;
-    io.BackendRendererUserData = nullptr;
+    io.BackendRendererName = NULL;
+    io.BackendRendererUserData = NULL;
     io.BackendFlags &= ~(ImGuiBackendFlags_RendererHasVtxOffset | ImGuiBackendFlags_RendererHasViewports);
     IM_DELETE(bd);
 }
@@ -648,7 +648,7 @@ struct ImGui_ImplDX11_ViewportData
     IDXGISwapChain*                 SwapChain;
     ID3D11RenderTargetView*         RTView;
 
-    ImGui_ImplDX11_ViewportData()   { SwapChain = nullptr; RTView = nullptr; }
+    ImGui_ImplDX11_ViewportData()   { SwapChain = NULL; RTView = NULL; }
     ~ImGui_ImplDX11_ViewportData()  { IM_ASSERT(SwapChain == nullptr && RTView == nullptr); }
 };
 
@@ -698,13 +698,13 @@ static void ImGui_ImplDX11_DestroyWindow(ImGuiViewport* viewport)
     {
         if (vd->SwapChain)
             vd->SwapChain->Release();
-        vd->SwapChain = nullptr;
+        vd->SwapChain = NULL;
         if (vd->RTView)
             vd->RTView->Release();
-        vd->RTView = nullptr;
+        vd->RTView = NULL;
         IM_DELETE(vd);
     }
-    viewport->RendererUserData = nullptr;
+    viewport->RendererUserData = NULL;
 }
 
 static void ImGui_ImplDX11_SetWindowSize(ImGuiViewport* viewport, ImVec2 size)
@@ -714,11 +714,11 @@ static void ImGui_ImplDX11_SetWindowSize(ImGuiViewport* viewport, ImVec2 size)
     if (vd->RTView)
     {
         vd->RTView->Release();
-        vd->RTView = nullptr;
+        vd->RTView = NULL;
     }
     if (vd->SwapChain)
     {
-        ID3D11Texture2D* pBackBuffer = nullptr;
+        ID3D11Texture2D* pBackBuffer = NULL;
         vd->SwapChain->ResizeBuffers(0, (UINT)size.x, (UINT)size.y, DXGI_FORMAT_UNKNOWN, 0);
         vd->SwapChain->GetBuffer(0, IID_PPV_ARGS(&pBackBuffer));
         if (pBackBuffer == nullptr) { fprintf(stderr, "ImGui_ImplDX11_SetWindowSize() failed creating buffers.\n"); return; }

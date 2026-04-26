@@ -945,7 +945,7 @@ CRender::~CRender()
 	for (FSlideWindowItem it : SWIs)
 	{
 		xr_free(it.sw);
-		it.sw = nullptr;
+		it.sw = NULL;
 		it.count = 0;
 	}
 	SWIs.clear();

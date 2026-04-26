@@ -383,10 +383,10 @@ Compressor::~Compressor()
 {
     if(mHold)
         al::destroy_at(mHold);
-    mHold = nullptr;
+    mHold = NULL;
     if(mDelay)
         al::destroy_n(mDelay, mNumChans);
-    mDelay = nullptr;
+    mDelay = NULL;
 }
 
 

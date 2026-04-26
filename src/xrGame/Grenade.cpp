@@ -449,7 +449,7 @@ void CGrenade::GrenadeContactCallback(bool &do_colide, bool bo1, dContact &c, SG
 	dxGeomUserData *gd1 = PHRetrieveGeomUserData(c.geom.g1);
 	dxGeomUserData *gd2 = PHRetrieveGeomUserData(c.geom.g2);
 
-	SGameMtl *mtl = nullptr;
+	SGameMtl *mtl = NULL;
 	Fvector pos;
 	Fvector nor;
 	pos.set(*(Fvector *)&c.geom.pos);

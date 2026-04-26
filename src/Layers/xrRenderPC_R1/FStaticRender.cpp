@@ -1,4 +1,4 @@
-﻿// CRender.cpp: implementation of the CRender class.
+// CRender.cpp: implementation of the CRender class.
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -1192,7 +1192,7 @@ static inline bool match_shader_id(LPCSTR const debug_shader_id, LPCSTR const fu
 
 void CRender::RenderToTarget(RRT target)
 {
-	ref_rt* RT = nullptr;
+	ref_rt* RT = NULL;
 
 	switch (target)
 	{
@@ -1207,7 +1207,7 @@ void CRender::RenderToTarget(RRT target)
 		break;
 	}
 
-	IDirect3DSurface9* pBackBuffer = nullptr;
+	IDirect3DSurface9* pBackBuffer = NULL;
 	HW.pDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &pBackBuffer);
 	D3DXLoadSurfaceFromSurface((*RT)->pRT, 0, 0, pBackBuffer, 0, 0, D3DX_DEFAULT, 0);
 	pBackBuffer->Release();

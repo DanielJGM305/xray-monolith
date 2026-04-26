@@ -158,7 +158,7 @@ WinMMPlayback::~WinMMPlayback()
 {
     if(mOutHdl)
         waveOutClose(mOutHdl);
-    mOutHdl = nullptr;
+    mOutHdl = NULL;
 
     al_free(mWaveBuffer[0].lpData);
     std::fill(mWaveBuffer.begin(), mWaveBuffer.end(), WAVEHDR{});
@@ -397,7 +397,7 @@ WinMMCapture::~WinMMCapture()
     // Close the Wave device
     if(mInHdl)
         waveInClose(mInHdl);
-    mInHdl = nullptr;
+    mInHdl = NULL;
 
     al_free(mWaveBuffer[0].lpData);
     std::fill(mWaveBuffer.begin(), mWaveBuffer.end(), WAVEHDR{});

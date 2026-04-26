@@ -2040,13 +2040,13 @@ ALCenum UpdateDeviceParams(ALCdevice *device, const int *attrList)
 
     device->AvgSpeakerDist = 0.0f;
     device->mNFCtrlFilter = NfcFilter{};
-    device->mUhjEncoder = nullptr;
-    device->AmbiDecoder = nullptr;
-    device->Bs2b = nullptr;
-    device->PostProcess = nullptr;
+    device->mUhjEncoder = NULL;
+    device->AmbiDecoder = NULL;
+    device->Bs2b = NULL;
+    device->PostProcess = NULL;
 
-    device->Limiter = nullptr;
-    device->ChannelDelays = nullptr;
+    device->Limiter = NULL;
+    device->ChannelDelays = NULL;
 
     std::fill(std::begin(device->HrtfAccumData), std::end(device->HrtfAccumData), float2{});
 
@@ -2394,7 +2394,7 @@ ALCenum UpdateDeviceParams(ALCdevice *device, const int *attrList)
                 {
                     if(send.Slot)
                         DecrementRef(send.Slot->ref);
-                    send.Slot = nullptr;
+                    send.Slot = NULL;
                     send.Gain = 1.0f;
                     send.GainHF = 1.0f;
                     send.HFReference = LOWPASSFREQREF;
@@ -3537,7 +3537,7 @@ START_API_FUNC
              */
             || (deviceName[0] == '\'' && deviceName[1] == '(')
             || al::strcasecmp(deviceName, "openal-soft") == 0)
-            deviceName = nullptr;
+            deviceName = NULL;
     }
     else
         TRACE("Opening default playback device\n");
@@ -3664,7 +3664,7 @@ START_API_FUNC
         TRACE("Opening capture device \"%s\"\n", deviceName);
         if(!deviceName[0] || al::strcasecmp(deviceName, alcDefaultName) == 0
             || al::strcasecmp(deviceName, "openal-soft") == 0)
-            deviceName = nullptr;
+            deviceName = NULL;
     }
     else
         TRACE("Opening default capture device\n");
@@ -4052,7 +4052,7 @@ START_API_FUNC
     if(deviceName)
     {
         if(!deviceName[0] || al::strcasecmp(deviceName, alcDefaultName) == 0)
-            deviceName = nullptr;
+            deviceName = NULL;
     }
 
     std::unique_lock<std::recursive_mutex> listlock{ListLock};
@@ -4080,7 +4080,7 @@ START_API_FUNC
     }
     catch(al::backend_exception &e) {
         listlock.unlock();
-        newbackend = nullptr;
+        newbackend = NULL;
 
         WARN("Failed to reopen playback device: %s\n", e.what());
         alcSetError(dev.get(), (e.errorCode() == al::backend_error::OutOfMemory)

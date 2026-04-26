@@ -41,8 +41,8 @@ struct physicsBone
 
 	physicsBone()
 	{
-		joint = NULL;
-		element = NULL;
+		joint = nullptr;
+		element = nullptr;
 	}
 };
 

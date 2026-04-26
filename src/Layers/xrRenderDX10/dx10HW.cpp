@@ -152,7 +152,7 @@ void CHW::CreateD3D()
     {
         HRESULT hr;
 
-        IDXGIFactory5* factory5 = nullptr;
+        IDXGIFactory5* factory5 = NULL;
         hr = m_pFactory->QueryInterface(&factory5);
 
         if (SUCCEEDED(hr) && factory5) {

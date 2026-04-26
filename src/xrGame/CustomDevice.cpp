@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "customdevice.h"
 #include "inventory.h"
 #include "actor.h"
@@ -10,7 +10,7 @@ CCustomDevice::CCustomDevice()
 {
 	m_bFastAnimMode = false;
 	m_bNeedActivation = false;
-	m_ui = nullptr;
+	m_ui = NULL;
 	m_bWorking = false;
 	m_bZoomed = false;
 	m_fZoomfactor = 0.f;

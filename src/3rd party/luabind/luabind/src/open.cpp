@@ -31,7 +31,7 @@ namespace luabind {
     {
         // get the global class registry, or create one if it doesn't exist
         // (it's global within a lua state)
-        detail::class_registry* r = nullptr;
+        detail::class_registry* r = NULL;
 
         // If you hit this assert it's because you have called luabind::open()
         // twice on the same lua_State.

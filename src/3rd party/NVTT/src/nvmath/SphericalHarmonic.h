@@ -42,7 +42,7 @@ namespace nv
 		~Sh()
 		{
 			delete [] m_elemArray;
-			m_elemArray = NULL;
+			m_elemArray = nullptr;
 		}
 		
 		/// Get number of bands.

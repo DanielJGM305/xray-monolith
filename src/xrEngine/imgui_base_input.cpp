@@ -61,7 +61,7 @@ namespace xr_imgui
         if (bd.clipboard_text_data)
         {
             xr_free(bd.clipboard_text_data);
-            bd.clipboard_text_data = nullptr;
+            bd.clipboard_text_data = NULL;
         }
     }
 

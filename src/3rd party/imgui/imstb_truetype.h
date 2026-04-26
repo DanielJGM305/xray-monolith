@@ -1685,7 +1685,7 @@ static int stbtt__GetGlyphShapeTT(const stbtt_fontinfo *info, int glyph_index, s
    int num_vertices=0;
    int g = stbtt__GetGlyfOffset(info, glyph_index);
 
-   *pvertices = NULL;
+   *pvertices = nullptr;
 
    if (g < 0) return 0;
 
@@ -2284,7 +2284,7 @@ static int stbtt__GetGlyphShapeT2(const stbtt_fontinfo *info, int glyph_index, s
          return output_ctx.num_vertices;
       }
    }
-   *pvertices = NULL;
+   *pvertices = nullptr;
    return 0;
 }
 
@@ -2929,7 +2929,7 @@ static void stbtt__fill_active_edges(unsigned char *scanline, int len, stbtt__ac
 static void stbtt__rasterize_sorted_edges(stbtt__bitmap *result, stbtt__edge *e, int n, int vsubsample, int off_x, int off_y, void *userdata)
 {
    stbtt__hheap hh = { 0, 0, 0 };
-   stbtt__active_edge *active = NULL;
+   stbtt__active_edge *active = nullptr;
    int y,j=0;
    int max_weight = (255 / vsubsample);  // weight per vertical scanline
    int s; // vertical subsample index
@@ -3305,7 +3305,7 @@ static void stbtt__fill_active_edges_new(float *scanline, float *scanline_fill, 
 static void stbtt__rasterize_sorted_edges(stbtt__bitmap *result, stbtt__edge *e, int n, int vsubsample, int off_x, int off_y, void *userdata)
 {
    stbtt__hheap hh = { 0, 0, 0 };
-   stbtt__active_edge *active = NULL;
+   stbtt__active_edge *active = nullptr;
    int y,j=0, i;
    float scanline_data[129], *scanline, *scanline2;
 
@@ -3704,7 +3704,7 @@ STBTT_DEF void stbtt_Rasterize(stbtt__bitmap *result, float flatness_in_pixels, 
 {
    float scale            = scale_x > scale_y ? scale_y : scale_x;
    int winding_count      = 0;
-   int *winding_lengths   = NULL;
+   int *winding_lengths   = nullptr;
    stbtt__point *windings = stbtt_FlattenCurves(vertices, num_verts, flatness_in_pixels / scale, &winding_lengths, &winding_count, userdata);
    if (windings) {
       stbtt__rasterize(result, windings, winding_lengths, winding_count, scale_x, scale_y, shift_x, shift_y, x_off, y_off, invert, userdata);
@@ -3739,7 +3739,7 @@ STBTT_DEF unsigned char *stbtt_GetGlyphBitmapSubpixel(const stbtt_fontinfo *info
    // now we get the size
    gbm.w = (ix1 - ix0);
    gbm.h = (iy1 - iy0);
-   gbm.pixels = NULL; // in case we error
+   gbm.pixels = nullptr; // in case we error
 
    if (width ) *width  = gbm.w;
    if (height) *height = gbm.h;
@@ -3827,7 +3827,7 @@ static int stbtt_BakeFontBitmap_internal(unsigned char *data, int offset,  // fo
    float scale;
    int x,y,bottom_y, i;
    stbtt_fontinfo f;
-   f.userdata = NULL;
+   f.userdata = nullptr;
    if (!stbtt_InitFont(&f, data, offset))
       return -1;
    STBTT_memset(pixels, 0, pw*ph); // background of 0 around pixels
@@ -4348,7 +4348,7 @@ STBTT_DEF int stbtt_PackFontRange(stbtt_pack_context *spc, const unsigned char *
 {
    stbtt_pack_range range;
    range.first_unicode_codepoint_in_range = first_unicode_codepoint_in_range;
-   range.array_of_unicode_codepoints = NULL;
+   range.array_of_unicode_codepoints = nullptr;
    range.num_chars                   = num_chars_in_range;
    range.chardata_for_range          = chardata_for_range;
    range.font_size                   = font_size;

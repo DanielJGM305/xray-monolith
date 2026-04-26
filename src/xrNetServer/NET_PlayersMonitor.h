@@ -130,7 +130,7 @@ public:
 			net_Players.begin(),
 			net_Players.end(),
 			predicate);
-		IClient* ret_client = NULL;
+		IClient* ret_client = nullptr;
 		if (client_iter != net_Players.end())
 		{
 			ret_client = *client_iter;
@@ -153,7 +153,7 @@ public:
 			net_Players.begin(),
 			net_Players.end(),
 			predicate);
-		IClient* ret_client = NULL;
+		IClient* ret_client = nullptr;
 		if (client_iter != net_Players.end())
 		{
 			ret_client = *client_iter;
@@ -207,7 +207,7 @@ public:
 			net_Players_disconnected.begin(),
 			net_Players_disconnected.end(),
 			predicate);
-		IClient* ret_client = NULL;
+		IClient* ret_client = nullptr;
 		if (client_iter != net_Players_disconnected.end())
 		{
 			ret_client = *client_iter;
@@ -234,7 +234,7 @@ public:
 			net_Players_disconnected.end(),
 			predicate);
 		now_iterating_in_net_players_disconn	=	false;
-		IClient* ret_client = NULL;
+		IClient* ret_client = nullptr;
 		if (client_iter != net_Players_disconnected.end())
 			ret_client = *client_iter;
 		//Msg("-S- Leaving from csPlayers [%d]", GetCurrentThreadId());

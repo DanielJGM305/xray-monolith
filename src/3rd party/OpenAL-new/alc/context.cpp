@@ -133,7 +133,7 @@ ALCcontext::~ALCcontext()
     eaxUninitialize();
 #endif // ALSOFT_EAX
 
-    mDefaultSlot = nullptr;
+    mDefaultSlot = NULL;
     count = std::accumulate(mEffectSlotList.cbegin(), mEffectSlotList.cend(), size_t{0u},
         [](size_t cur, const EffectSlotSubList &sublist) noexcept -> size_t
         { return cur + static_cast<uint>(al::popcount(~sublist.FreeMask)); });
@@ -510,7 +510,7 @@ void ALCcontext::eax_initialize()
 
 bool ALCcontext::eax_has_no_default_effect_slot() const noexcept
 {
-    return mDefaultSlot == nullptr;
+    return mDefaultSlot == NULL;
 }
 
 void ALCcontext::eax_ensure_no_default_effect_slot() const

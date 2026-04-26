@@ -55,7 +55,7 @@ struct TgaHeader {
 struct TgaFile {
 
 	TgaFile() {
-		mem = NULL;
+		mem = nullptr;
 	}
 	~TgaFile() {
 		free();
@@ -70,7 +70,7 @@ struct TgaFile {
 	}
 	void free() {
 		delete [] mem;
-		mem = NULL;
+		mem = nullptr;
 	}
 
 	TgaHeader head;

@@ -14,7 +14,7 @@ SProjectorLight::SProjectorLight(CProjector *obj, LPCSTR sec)
 {
 	m_sec._set(sec);
 	O = obj;
-	m_lanim = nullptr;
+	m_lanim = NULL;
 	m_light = ::Render->light_create();
 	m_light->set_type(IRender_Light::SPOT);
 	m_light->set_shadow(true);

@@ -92,7 +92,7 @@ void CRT::destroy()
 	{
 		pTexture->surface_set(0);
 		pTexture.destroy();
-		pTexture = nullptr;	 
+		pTexture = NULL;	 
 	}
 
 	_RELEASE(pRT);

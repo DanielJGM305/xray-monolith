@@ -14,7 +14,7 @@ struct CUICell
 {
 	CUICell()
 	{
-		m_item = NULL;
+		m_item = nullptr;
 		Clear();
 	}
 
@@ -28,7 +28,7 @@ struct CUICell
 		m_bMainItem = bMain;
 	}
 
-	bool Empty() { return m_item == NULL; }
+	bool Empty() { return m_item == nullptr; }
 	bool MainItem() { return m_bMainItem; }
 	void Clear();
 	bool operator ==(const CUICell& C) const { return (m_item == C.m_item); }

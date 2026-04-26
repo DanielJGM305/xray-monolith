@@ -59,7 +59,7 @@ namespace xr_imgui
     {
         m_render->OnDeviceDestroy();
         RenderFactory->DestroyImGuiRender(m_render);
-        m_render = nullptr;
+        m_render = NULL;
     }
 
     void ide::OnDeviceResetBegin() const

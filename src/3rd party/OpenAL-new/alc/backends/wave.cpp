@@ -117,7 +117,7 @@ WaveBackend::~WaveBackend()
 {
     if(mFile)
         fclose(mFile);
-    mFile = nullptr;
+    mFile = NULL;
 }
 
 int WaveBackend::mixerProc()

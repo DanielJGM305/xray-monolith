@@ -576,7 +576,7 @@ attachable_hud_item::~attachable_hud_item()
 {
 	IRenderVisual* v = m_model->dcast_RenderVisual();
 	::Render->model_Delete(v);
-	m_model = nullptr;
+	m_model = NULL;
 }
 
 void attachable_hud_item::load(const shared_str& sect_name)
@@ -700,12 +700,12 @@ u32 attachable_hud_item::anim_play(const shared_str& anm_name_b, BOOL bMixIn, co
 
 player_hud::player_hud()
 {
-	m_model = nullptr;
-	m_model_2 = nullptr;
+	m_model = NULL;
+	m_model_2 = NULL;
 
-	m_attached_items[0] = nullptr;
-	m_attached_items[1] = nullptr;
-	m_attached_items[SCOPE_ATTACH_IDX] = nullptr;
+	m_attached_items[0] = NULL;
+	m_attached_items[1] = NULL;
+	m_attached_items[SCOPE_ATTACH_IDX] = NULL;
 	m_attach_offset.identity();
 	m_attach_offset_2.identity();
 	m_transform.identity();
@@ -756,11 +756,11 @@ player_hud::~player_hud()
 {
 	IRenderVisual* v = m_model->dcast_RenderVisual();
 	::Render->model_Delete(v);
-	m_model = nullptr;
+	m_model = NULL;
 
 	v = m_model_2->dcast_RenderVisual();
 	::Render->model_Delete(v);
-	m_model_2 = nullptr;
+	m_model_2 = NULL;
 
 	delete_data(m_hand_motions);
 	delete_data(m_script_layers);
@@ -1362,7 +1362,7 @@ void player_hud::updateMovementLayerState()
 
 	if (need_blend)
 	{
-		CWeapon* wep = nullptr;
+		CWeapon* wep = NULL;
 
 		if (m_attached_items[0] && m_attached_items[0]->m_parent_hud_item->has_object() && m_attached_items[0]->m_parent_hud_item->object().cast_weapon())
 			wep = m_attached_items[0]->m_parent_hud_item->object().cast_weapon();
@@ -1498,7 +1498,7 @@ void player_hud::StopScriptAnim()
 {
 	u8 part = script_anim_part;
 	script_anim_part = u8(-1);
-	script_anim_item_model = nullptr;
+	script_anim_item_model = NULL;
 	script_anim_lead_gun = false;
 
 	updateMovementLayerState();

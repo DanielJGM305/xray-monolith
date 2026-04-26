@@ -124,7 +124,7 @@ static void GlueFreeBlocks()
 	UINT i, k, sz;
 	MEM_BLK s0, *p, *p0, *p1;
 	if (LoUnit != HiUnit) *LoUnit = 0;
-	for (i = 0, (p0 = &s0)->next = NULL; i < N_INDEXES; i++)
+	for (i = 0, (p0 = &s0)->next = nullptr; i < N_INDEXES; i++)
 		while (BList[i].avail())
 		{
 			p = (MEM_BLK*)BList[i].remove();

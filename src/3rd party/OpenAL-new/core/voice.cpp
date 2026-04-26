@@ -726,7 +726,7 @@ void Voice::mix(const State vstate, ContextBase *Context, const nanoseconds devi
     if(mFlags.test(VoiceIsStatic) && BufferLoopItem)
     {
         if(DataPosInt >= 0 && static_cast<uint>(DataPosInt) >= BufferListItem->mLoopEnd)
-            BufferLoopItem = nullptr;
+            BufferLoopItem = NULL;
     }
 
     uint OutPos{0u};
@@ -1089,7 +1089,7 @@ void Voice::mix(const State vstate, ContextBase *Context, const nanoseconds devi
             {
                 /* Handle non-looping static source */
                 if(static_cast<uint>(DataPosInt) >= BufferListItem->mSampleLen)
-                    BufferListItem = nullptr;
+                    BufferListItem = NULL;
             }
         }
         else if(mFlags.test(VoiceIsCallback))
@@ -1108,7 +1108,7 @@ void Voice::mix(const State vstate, ContextBase *Context, const nanoseconds devi
             }
             else
             {
-                BufferListItem = nullptr;
+                BufferListItem = NULL;
                 mNumCallbackBlocks = 0;
                 mCallbackBlockBase += blocksDone;
             }
@@ -1193,7 +1193,7 @@ void Voice::prepare(DeviceBase *device)
     mPrevSamples.reserve(maxu(2, num_channels));
     mPrevSamples.resize(num_channels);
 
-    mDecoder = nullptr;
+    mDecoder = NULL;
     mDecoderPadding = 0;
     if(mFmtChannels == FmtSuperStereo)
     {

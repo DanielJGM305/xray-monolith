@@ -15,7 +15,7 @@
 	inline void FactoryPtr<I##Class>::DestroyObject(void) \
 { \
 	RenderFactory->Destroy##Class(m_pObject); \
-	m_pObject = NULL; \
+	m_pObject = nullptr; \
 }
 
 
@@ -90,7 +90,7 @@ void FactoryPtr<IStatsRender>::CreateObject(void)
 void FactoryPtr<IStatsRender>::DestroyObject(void)
 {
 	RenderFactory->DestroyStatsRender(m_pObject);
-	m_pObject = NULL;
+	m_pObject = nullptr;
 }
 */
 

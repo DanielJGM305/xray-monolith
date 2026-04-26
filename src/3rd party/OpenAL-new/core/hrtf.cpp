@@ -1462,7 +1462,7 @@ void HrtfStore::dec_ref()
             if(entry && ReadRef(entry->mRef) == 0)
             {
                 TRACE("Unloading unused HRTF %s\n", hrtf.mFilename.data());
-                hrtf.mEntry = nullptr;
+                hrtf.mEntry = NULL;
                 return true;
             }
             return false;

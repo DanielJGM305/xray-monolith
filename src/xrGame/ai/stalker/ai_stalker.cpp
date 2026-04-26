@@ -103,7 +103,7 @@ CAI_Stalker::CAI_Stalker() :
 	dTimeNfSeen = Device.dwTimeGlobal + 1000;
 
 #ifdef HOLDERCUSTOM_NEW
-	m_holder = nullptr;
+	m_holder = NULL;
 #endif
 }
 
@@ -1766,7 +1766,7 @@ void CAI_Stalker::detach_Holder()
 #endif
 
 	m_holder->detach_Actor();
-	m_holder = nullptr;
+	m_holder = NULL;
 }
 
 bool CAI_Stalker::use_HolderEx(CHolderCustom *object)

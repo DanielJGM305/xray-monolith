@@ -1736,7 +1736,7 @@ bool CScriptGameObject::WeaponInGrenadeMode()
 
 void CScriptGameObject::SetBoneVisible(LPCSTR bone_name, bool bVisibility, bool bRecursive, bool bHud)
 {
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	CHudItem* itm = smart_cast<CHudItem*>(&object());
 	if (bHud && itm && itm->HudItemData())
@@ -1759,7 +1759,7 @@ void CScriptGameObject::SetBoneVisible(LPCSTR bone_name, bool bVisibility, bool 
 
 bool CScriptGameObject::IsBoneVisible(LPCSTR bone_name, bool bHud)
 {
-	IKinematics* k = nullptr;
+	IKinematics* k = NULL;
 
 	CHudItem* itm = smart_cast<CHudItem*>(&object());
 	if (bHud && itm && itm->HudItemData())

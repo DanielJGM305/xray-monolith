@@ -36,12 +36,12 @@ struct predicate_find_stat
 
 CUIGameCustom::CUIGameCustom()
 {
-	MsgConfig = nullptr;
-	ActorMenu = nullptr;
-	PdaMenu = nullptr;
-	Window = nullptr;
-	UIMainIngameWnd = nullptr;
-	m_pMessagesWnd = nullptr;
+	MsgConfig = NULL;
+	ActorMenu = NULL;
+	PdaMenu = NULL;
+	Window = NULL;
+	UIMainIngameWnd = NULL;
+	m_pMessagesWnd = NULL;
 	ShowGameIndicators(true);
 	ShowCrosshair(true);
 }
@@ -326,7 +326,7 @@ void CUIGameCustom::enable_fake_indicators(bool enable)
 
 StaticDrawableWrapper::StaticDrawableWrapper()
 {
-	m_static = nullptr;
+	m_static = NULL;
 	m_endTime = -1.0f;
 }
 

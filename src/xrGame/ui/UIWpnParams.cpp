@@ -1,4 +1,4 @@
-﻿#include "pch_script.h"
+#include "pch_script.h"
 #include "UIWpnParams.h"
 #include "UIXmlInit.h"
 #include "../level.h"
@@ -133,7 +133,7 @@ void CUIWpnParams::InitFromXml(CUIXml& xml_doc)
 			iCnt++;
 			xr_sprintf(str, sizeof(str), "wpn_params:static_ammo_type%d", iCnt);
 
-			bAmmoTypeExistInXML = xml_doc.NavigateToNode(str, 0) != nullptr;
+			bAmmoTypeExistInXML = xml_doc.NavigateToNode(str, 0) != NULL;
 			if (bAmmoTypeExistInXML)
 			{
 				CUIStatic* pStAmmoType = new CUIStatic();

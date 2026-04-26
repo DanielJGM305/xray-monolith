@@ -151,7 +151,7 @@ namespace nv
 		/// Constructs a null string. @sa isNull()
 		String()
 		{
-			data = NULL;
+			data = nullptr;
 		}
 
 		/// Constructs a shared copy of str.
@@ -260,7 +260,7 @@ namespace nv
 		}
 	
 		/// Returns true if this string is the null string.
-		bool isNull() const { return data == NULL; }
+		bool isNull() const { return data == nullptr; }
 	
 		/// Return the exact length.
 		uint length() const { nvDebugCheck(data != NULL); return uint(strlen(data)); }
@@ -295,7 +295,7 @@ namespace nv
 				setRefCount(count - 1);
 				if (count - 1 == 0) {
 					mem::free(data - 2);
-					data = NULL;
+					data = nullptr;
 				}
 			}
 		}

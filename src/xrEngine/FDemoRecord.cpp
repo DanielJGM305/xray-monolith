@@ -79,7 +79,7 @@ CDemoRecord::CDemoRecord(const char* name, float life_time, BOOL return_ctrl_inp
 	_unlink(name);
 	file = FS.w_open(name);
 	isInputBlocked = FALSE;
-	pDemoRecords = nullptr;
+	pDemoRecords = NULL;
 	if (file)
 	{
 		g_position.set_position = false;

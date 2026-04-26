@@ -100,12 +100,12 @@ public:
 
 
 TEMPLATE_SPECIALIZATION
-typename CSINI_IdToIndex::T_VECTOR* CSINI_IdToIndex::m_pItemDataVector = NULL;
+typename CSINI_IdToIndex::T_VECTOR* CSINI_IdToIndex::m_pItemDataVector = nullptr;
 
 TEMPLATE_SPECIALIZATION
-LPCSTR CSINI_IdToIndex::section_name = NULL;
+LPCSTR CSINI_IdToIndex::section_name = nullptr;
 TEMPLATE_SPECIALIZATION
-LPCSTR CSINI_IdToIndex::line_name = NULL;
+LPCSTR CSINI_IdToIndex::line_name = nullptr;
 
 
 TEMPLATE_SPECIALIZATION

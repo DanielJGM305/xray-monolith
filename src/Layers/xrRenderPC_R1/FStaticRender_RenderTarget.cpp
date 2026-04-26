@@ -26,7 +26,7 @@ CRenderTarget::CRenderTarget()
 	param_noise_fps = 25.f;
 	param_noise_scale = 1.f;
 
-	rt_secondVP = nullptr; //--#SM+# +SecondVP+
+	rt_secondVP = NULL; //--#SM+# +SecondVP+
 
 	param_color_map_influence = 0.0f;
 	param_color_map_interpolate = 0.0f;

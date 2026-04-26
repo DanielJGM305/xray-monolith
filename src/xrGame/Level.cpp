@@ -108,12 +108,12 @@ static void createPrefetchThreadSignal()
 
 struct spawn_and_prefetch_events
 {
-	NET_Queue_Event* spawn_events = nullptr;
-    spawn_events_data_map* spawn_events_data = nullptr;
-    prefetch_event_queue* prefetch_events = nullptr;
-    models_set* prefetched_models = nullptr;
-    bool* closeSignal = nullptr;
-    xrSRWLock* prefetch_lock = nullptr;
+	NET_Queue_Event* spawn_events = NULL;
+    spawn_events_data_map* spawn_events_data = NULL;
+    prefetch_event_queue* prefetch_events = NULL;
+    models_set* prefetched_models = NULL;
+    bool* closeSignal = NULL;
+    xrSRWLock* prefetch_lock = NULL;
 };
 
 u16	GetSpawnInfo(NET_Packet& P, u16& parent_id, shared_str& section)
@@ -233,7 +233,7 @@ CLevel::CLevel() :
     , DemoCS(MUTEX_PROFILE_ID(DemoCS))
 #endif
 {
-	g_bDebugEvents = strstr(Core.Params, "-debug_ge") != nullptr;
+	g_bDebugEvents = strstr(Core.Params, "-debug_ge") != NULL;
 	game_events = xr_new<NET_Queue_Event>();
 
     eChangeRP = Engine.Event.Handler_Attach("LEVEL:ChangeRP", this);
@@ -286,11 +286,11 @@ extern CAI_Space* g_ai_space;
 
 CLevel::~CLevel()
 {
-	//crash_saving::save_impl = nullptr; // CLevel not available, disable crash save
+	//crash_saving::save_impl = NULL; // CLevel not available, disable crash save
 	xr_delete(g_player_hud);
 	delete_data(m_script_attachments);
 	delete_data(hud_zones_list);
-	hud_zones_list = nullptr;
+	hud_zones_list = NULL;
 	Msg("- Destroying level");
 	Engine.Event.Handler_Detach(eEntitySpawn, this);
 	Engine.Event.Handler_Detach(eEnvironment, this);
@@ -356,16 +356,16 @@ CLevel::~CLevel()
     // XXX nitrocaster: find better place for this clean()
     CTradeParameters::clean();
     if (g_tutorial && g_tutorial->m_pStoredInputReceiver == this)
-        g_tutorial->m_pStoredInputReceiver = nullptr;
+        g_tutorial->m_pStoredInputReceiver = NULL;
     if (g_tutorial2 && g_tutorial2->m_pStoredInputReceiver == this)
-        g_tutorial2->m_pStoredInputReceiver = nullptr;
+        g_tutorial2->m_pStoredInputReceiver = NULL;
     if (IsDemoPlay())
     {
         StopPlayDemo();
         if (m_reader)
         {
             FS.r_close(m_reader);
-            m_reader = nullptr;
+            m_reader = NULL;
         }
     }
     xr_delete(m_msg_filter);
@@ -770,11 +770,11 @@ void CLevel::ProcessGameEvents()
 							auto c = pSettings->r_string(section.c_str(), "class");
 
 							// Do not prefetch fake missiles of a weapon
-							valid &= strstr(c, "G_RPG7") == nullptr;
-							valid &= strstr(c, "G_FAKE") == nullptr;
+							valid &= strstr(c, "G_RPG7") == NULL;
+							valid &= strstr(c, "G_FAKE") == NULL;
 
 							// Do not prefetch helicopters
-							valid &= strstr(c, "C_HLCP") == nullptr;
+							valid &= strstr(c, "C_HLCP") == NULL;
 						}
 
 						return valid;
@@ -829,7 +829,7 @@ void CLevel::ProcessGameEvents()
 							E.p = P;
 							E.models = models;
                             E.id = obj_id;
-                            E.hasAlifeObject = obj != nullptr;
+                            E.hasAlifeObject = obj != NULL;
 
 							events_to_prefetch.push_back(E);
 
@@ -951,8 +951,8 @@ void CLevel::MakeReconnect()
 	if (!Engine.Event.Peek("KERNEL:disconnect"))
 	{
 		Engine.Event.Defer("KERNEL:disconnect");
-		char const* server_options = nullptr;
-		char const* client_options = nullptr;
+		char const* server_options = NULL;
+		char const* client_options = NULL;
 		if (m_caServerOptions.c_str())
 		{
 			server_options = xr_strdup(*m_caServerOptions);
