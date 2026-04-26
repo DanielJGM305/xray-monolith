@@ -172,64 +172,22 @@ bool CSheduler::internal_Unregister(ISheduled* O, BOOL RT, bool warn_on_not_foun
 bool CSheduler::Registered(ISheduled* object) const
 {
     u32 count = 0;
-    typedef xr_vector<Item> ITEMS;
 
-    {
-        ITEMS::const_iterator I = ItemsRT.begin();
-        ITEMS::const_iterator E = ItemsRT.end();
-        for (; I != E; ++I)
-            if ((*I).Object == object)
-            {
-                // Msg ("0x%8x found in RT",object);
-                count = 1;
-                break;
-            }
-    }
-    {
-        ITEMS::const_iterator I = Items.begin();
-        ITEMS::const_iterator E = Items.end();
-        for (; I != E; ++I)
-            if ((*I).Object == object)
-            {
-                // Msg ("0x%8x found in non-RT",object);
-                VERIFY(!count);
-                count = 1;
-                break;
-            }
-    }
+    for (const auto& item : ItemsRT)
+        if (item.Object == object) { count = 1; break; }
 
-    {
-        ITEMS::const_iterator I = ItemsProcessed.begin();
-        ITEMS::const_iterator E = ItemsProcessed.end();
-        for (; I != E; ++I)
-            if ((*I).Object == object)
-            {
-                // Msg ("0x%8x found in process items",object);
-                VERIFY(!count);
-                count = 1;
-                break;
-            }
-    }
+    for (const auto& item : Items)
+        if (item.Object == object) { VERIFY(!count); count = 1; break; }
 
-    typedef xr_vector<ItemReg> ITEMS_REG;
-    ITEMS_REG::const_iterator I = Registration.begin();
-    ITEMS_REG::const_iterator E = Registration.end();
-    for (; I != E; ++I)
+    for (const auto& item : ItemsProcessed)
+        if (item.Object == object) { VERIFY(!count); count = 1; break; }
+
+    for (const auto& reg : Registration)
     {
-        if ((*I).Object == object)
+        if (reg.Object == object)
         {
-            if ((*I).OP)
-            {
-                // Msg ("0x%8x found in registration on register",object);
-                VERIFY(!count);
-                ++count;
-            }
-            else
-            {
-                // Msg ("0x%8x found in registration on UNregister",object);
-                VERIFY(count == 1);
-                --count;
-            }
+            if (reg.OP) { VERIFY(!count); ++count; }
+            else { VERIFY(count == 1); --count; }
         }
     }
 
@@ -329,7 +287,7 @@ void CSheduler::ProcessStep()
 		u32 Elapsed = dwTime - T.dwTimeOfLastExecute;
 		bool condition;
 
-		condition = (NULL == T.Object || !T.Object->shedule_Needed());
+		condition = (nullptr == T.Object || !T.Object->shedule_Needed());
 		if (condition)
 		{
 			// Erase element
