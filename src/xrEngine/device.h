@@ -431,6 +431,9 @@ public:
 	xrCriticalSection mt_csEnter;
 	xrCriticalSection mt_csLeave;
 	volatile BOOL mt_bMustExit;
+    // Discord thread sync (Project Singularity)
+    HANDLE hDiscordWakeEvent = nullptr;
+    HANDLE hDiscordShutdownEvent = nullptr;
 
 	ICF void remove_from_seq_parallel(const fastdelegate::FastDelegate0<>& delegate)
 	{

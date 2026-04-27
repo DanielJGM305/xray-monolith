@@ -593,66 +593,100 @@ void CRenderDevice::message_loop()
 
 void mt_DiscordThread(void*)
 {
-	while (true)
-	{
-		if (!pApp)
-		{
-			Msg("[Discord] pApp destroyed, killing thread");
-			return;
-		}
+    HANDLE handles[2] = {
+        Device.hDiscordShutdownEvent,
+        Device.hDiscordWakeEvent
+    };
 
-		//Discord
-		if (use_discord && psDeviceFlags2.test(rsDiscord))
-		{
-			START_PROFILE("Discord");
-			discord_core->RunCallbacks();
-			updateDiscordPresence();
-			STOP_PROFILE;
-			Sleep(int(discord_update_rate * 1000));
-		}
-		else
-		{
-			Sleep(1000); // Sleep for 1 second if Discord is not used or disabled
-		}
-	}
+    while (true)
+    {
+        if (!pApp)
+        {
+            Msg("[Discord] pApp destroyed, killing thread");
+            return;
+        }
+
+        const bool discord_active = use_discord && psDeviceFlags2.test(rsDiscord);
+        const DWORD timeout = discord_active
+            ? DWORD(discord_update_rate * 1000)
+            : INFINITE;
+
+        DWORD result = WaitForMultipleObjects(2, handles, FALSE, timeout);
+
+        if (result == WAIT_OBJECT_0)
+        {
+            Msg("[Discord] Shutdown signal received, exiting thread");
+            return;
+        }
+
+        if (!pApp)
+        {
+            Msg("[Discord] pApp destroyed, killing thread");
+            return;
+        }
+
+        if (use_discord && psDeviceFlags2.test(rsDiscord))
+        {
+            START_PROFILE("Discord");
+            discord_core->RunCallbacks();
+            updateDiscordPresence();
+            STOP_PROFILE;
+        }
+    }
 }
 
 void CRenderDevice::Run()
 {
-	// DUMP_PHASE;
-	g_bLoaded = FALSE;
-	Log("Starting engine...");
-	thread_name("X-RAY Primary thread");
-	// Startup timers and calculate timer delta
-	dwTimeGlobal = 0;
-	Timer_MM_Delta = 0;
-	{
-		u32 time_mm = timeGetTime();
-		while (timeGetTime() == time_mm); // wait for next tick
-		u32 time_system = timeGetTime();
-		u32 time_local = TimerAsync();
-		Timer_MM_Delta = time_system - time_local;
-	}
-	// Start all threads
-	// InitializeCriticalSection (&mt_csEnter);
-	// InitializeCriticalSection (&mt_csLeave);
-	mt_csEnter.Enter();
-	mt_bMustExit = FALSE;
-	thread_spawn(mt_FreezeThread, "Freeze detecting thread", 0, 0);
-	thread_spawn(mt_Thread, "X-RAY Secondary thread", 0, this);
-	thread_spawn(mt_DiscordThread, "X-RAY Discord thread", 0, 0);
-	// Message cycle
-	seqAppStart.Process(rp_AppStart);
-	m_pRender->ClearTarget();
-	SetForegroundWindow(m_hWnd);
-	message_loop();
-	seqAppEnd.Process(rp_AppEnd);
-	// Stop Balance-Thread
-	mt_bMustExit = TRUE;
-	mt_csEnter.Leave();
-	while (mt_bMustExit) Sleep(0);
-	// DeleteCriticalSection (&mt_csEnter);
-	// DeleteCriticalSection (&mt_csLeave);
+    // DUMP_PHASE;
+    g_bLoaded = FALSE;
+    Log("Starting engine...");
+    thread_name("X-RAY Primary thread");
+    // Startup timers and calculate timer delta
+    dwTimeGlobal = 0;
+    Timer_MM_Delta = 0;
+    {
+        u32 time_mm = timeGetTime();
+        while (timeGetTime() == time_mm); // wait for next tick
+        u32 time_system = timeGetTime();
+        u32 time_local = TimerAsync();
+        Timer_MM_Delta = time_system - time_local;
+    }
+    // Start all threads
+    mt_csEnter.Enter();
+    mt_bMustExit = FALSE;
+    thread_spawn(mt_FreezeThread, "Freeze detecting thread", 0, 0);
+    thread_spawn(mt_Thread, "X-RAY Secondary thread", 0, this);
+
+    // Discord thread sync (Project Singularity)
+    hDiscordWakeEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr); // auto-reset
+    hDiscordShutdownEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr); // manual-reset
+
+    thread_spawn(mt_DiscordThread, "X-RAY Discord thread", 0, 0);
+
+    // Message cycle
+    seqAppStart.Process(rp_AppStart);
+    m_pRender->ClearTarget();
+    SetForegroundWindow(m_hWnd);
+    message_loop();
+    seqAppEnd.Process(rp_AppEnd);
+
+    // Discord thread cleanup (Project Singularity)
+    if (hDiscordShutdownEvent)
+    {
+        SetEvent(hDiscordShutdownEvent);
+        CloseHandle(hDiscordShutdownEvent);
+        hDiscordShutdownEvent = nullptr;
+    }
+    if (hDiscordWakeEvent)
+    {
+        CloseHandle(hDiscordWakeEvent);
+        hDiscordWakeEvent = nullptr;
+    }
+
+    // Stop Balance-Thread
+    mt_bMustExit = TRUE;
+    mt_csEnter.Leave();
+    while (mt_bMustExit) Sleep(0);
 }
 
 u32 app_inactive_time = 0;
