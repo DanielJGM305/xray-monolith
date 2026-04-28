@@ -309,3 +309,71 @@ Los pools son de tamaño fijo pre-allocados. No pueden crecer dinámicamente. Pa
 
 *Documento generado durante Fase 2.5 de PROJECT SINGULARITY*  
 *Equipo: Daniel (líder) + Claude (especialista C++/memoria) + Gemini (arquitectura)*
+
+---
+
+## FIXES COMPLETADOS — FASE 3
+
+### Fix 1 — mem_compact() en Release
+**Archivo:** `src/xrCore/xrMemory.cpp`  
+**Estado:** ✅ Completado
+
+Removido el `#ifdef DEBUG_MEMORY_MANAGER` para que `mem_compact()` funcione en builds de Release.
+
+---
+
+### Fix 2 — xrSheduler.cpp modernización
+**Archivo:** `src/xrEngine/Engine/Core/xrSheduler.cpp`  
+**Estado:** ✅ Completado
+
+- `NULL` → `nullptr` en punteros reales
+- Iteradores modernizados con range-based for loops
+
+---
+
+### Fix 3 — Discord Thread Event-Driven
+**Archivos:** `src/xrEngine/device.h`, `src/xrEngine/device.cpp`  
+**Estado:** ✅ Completado  
+**Branch:** `phase3-threading-fixes`
+
+**Problema:** `mt_DiscordThread` usaba `Sleep(1000)` en polling loop ciego. El profiling baseline (`profile_vanilla_01.sleepy`) mostró que la dirección `0x1400CACB0` era responsable de 210 segundos de `SleepEx` — ~35% del tiempo total de profiling.
+
+**Solución:** Reemplazado por modelo event-driven con `WaitForMultipleObjects`:
+- `hDiscordWakeEvent` (auto-reset) — despierta el hilo ante cambio de estado
+- `hDiscordShutdownEvent` (manual-reset) — apaga el hilo limpiamente
+- Cuando Discord está inactivo: duerme `INFINITE` en lugar de `Sleep(1000)`
+- Cleanup limpio de handles al cerrar el engine
+
+**Resultado verificado:** El segundo perfil (`profile_singularity_02.sleepy`) confirmó que el Discord thread desapareció completamente de los callers de `SleepEx`. El log de shutdown confirma operación correcta:
+```
+[Discord] Shutdown signal received, exiting thread
+```
+Carga del juego notablemente más rápida como efecto secundario.
+
+---
+
+## PROBLEMA CONOCIDO — Render negro en partida (R4/stub_default)
+
+**Estado:** Abierto  
+**Detectado:** 27/04/2026
+
+### Síntoma
+Al copiar el exe compilado (AnomalyDX11.exe) a Anomaly 1.5.3 y cargar una partida, el mundo 3D se ve negro. UI, inventario y audio funcionan correctamente.
+
+### Causa identificada
+El log muestra shaders faltantes reemplazados por stub_default (shader vacío):
+```
+DX10: ...shaders\r3\deffer_terrain_low_flat.ps is missing. Replace with stub_default.ps
+```
+Los shaders del gamedata de Anomaly 1.5.3 no son 100% compatibles con xray-monolith compilado desde source.
+
+### Lo que SÍ funciona
+- Engine compila y arranca correctamente (0 errores)
+- UI renderiza bien
+- Discord fix operando correctamente (confirmado por log)
+- Profiling válido
+
+### Próximos pasos para resolver
+- Investigar qué shaders necesita xray-monolith vs los de Anomaly stock
+- Posiblemente compilar shaders desde el SDK del repo
+- Consultar comunidad de themrdemonized sobre compatibilidad

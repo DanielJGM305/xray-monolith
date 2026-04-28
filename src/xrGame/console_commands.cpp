@@ -1912,20 +1912,22 @@ public:
 	CCC_DiscordStatus(LPCSTR N, Flags32* V, u32 M) :
 		CCC_Mask(N, V, M){};
 
-	virtual void Execute(LPCSTR args)
-	{
-		if (EQ(args, "on") || EQ(args, "1"))
-		{
-			value->set(mask, TRUE);
-			discord_gameinfo.ex_update = true;
-		}
-		else if (EQ(args, "off") || EQ(args, "0"))
-		{
-			value->set(mask, FALSE);
-			clearDiscordPresence();
-		}
-		else InvalidSyntax();
-	}
+    virtual void Execute(LPCSTR args)
+    {
+        if (EQ(args, "on") || EQ(args, "1"))
+        {
+            value->set(mask, TRUE);
+            discord_gameinfo.ex_update = true;
+            if (Device.hDiscordWakeEvent) SetEvent(Device.hDiscordWakeEvent);
+        }
+        else if (EQ(args, "off") || EQ(args, "0"))
+        {
+            value->set(mask, FALSE);
+            clearDiscordPresence();
+            if (Device.hDiscordWakeEvent) SetEvent(Device.hDiscordWakeEvent);
+        }
+        else InvalidSyntax();
+    }
 };
 
 struct CCC_StartTimeSingle : public IConsole_Command
