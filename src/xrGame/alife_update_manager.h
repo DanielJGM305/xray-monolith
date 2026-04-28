@@ -24,7 +24,8 @@ class CALifeUpdateManager :
 	public ISheduled
 {
 private:
-	bool m_first_time;
+    bool m_first_time;
+    xrCriticalSection m_alife_mt_lock; // Nuestro nuevo candado anti-crashes
 
 protected:
 	u64 m_max_process_time;

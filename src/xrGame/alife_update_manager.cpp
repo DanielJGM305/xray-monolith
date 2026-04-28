@@ -112,8 +112,12 @@ void CALifeUpdateManager::update_scheduled(bool init_ef)
 
 void CALifeUpdateManager::update()
 {
-	update_switch();
-	update_scheduled(false);
+    m_alife_mt_lock.Enter(); // Cerramos la puerta con llave
+
+    update_switch();
+    update_scheduled(false);
+
+    m_alife_mt_lock.Leave(); // Abrimos la puerta
 }
 
 void CALifeUpdateManager::shedule_Update(u32 dt)
