@@ -23,9 +23,18 @@ class CALifeUpdateManager :
 	public CALifeStorageManager,
 	public ISheduled
 {
+public:
+    xrCriticalSection m_alife_mt_lock; // LO MOVIMOS AQUÍ ARRIBA A PUBLIC
+
+    // NUESTRA LLAVE INTELIGENTE RAII
+    struct CALifeLock {
+        CALifeUpdateManager& mgr;
+        CALifeLock(CALifeUpdateManager& m) : mgr(m) { mgr.m_alife_mt_lock.Enter(); }
+        ~CALifeLock() { mgr.m_alife_mt_lock.Leave(); }
+    };
+
 private:
     bool m_first_time;
-    xrCriticalSection m_alife_mt_lock; // Nuestro nuevo candado anti-crashes
 
 protected:
 	u64 m_max_process_time;

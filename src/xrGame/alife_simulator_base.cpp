@@ -22,6 +22,7 @@
 #include "level_graph.h"
 #include "inventory_upgrade_manager.h"
 #include "level.h"
+#include "alife_update_manager.h"
 
 #pragma warning(push)
 #pragma warning(disable:4995)
@@ -268,42 +269,48 @@ void CALifeSimulatorBase::create(CSE_ALifeObject* object)
 
 void CALifeSimulatorBase::release(CSE_Abstract* abstract, bool alife_query)
 {
+    
+    // --- NUESTRA LLAVE INTELIGENTE RAII ---
+    // Usamos smart_cast porque la herencia de X-Ray es virtual
+    CALifeUpdateManager::CALifeLock lock(*smart_cast<CALifeUpdateManager*>(this));
+    // --------------------------------------
+
 #ifdef DEBUG
-	if (psAI_Flags.test(aiALife)) {
-		Msg							("[LSS] Releasing object [%s][%s][%d][%x]",abstract->name_replace(),*abstract->s_name,abstract->ID,smart_cast<void*>(abstract));
-	}
+    if (psAI_Flags.test(aiALife)) {
+        Msg("[LSS] Releasing object [%s][%s][%d][%x]", abstract->name_replace(), *abstract->s_name, abstract->ID, smart_cast<void*>(abstract));
+    }
 #endif
-	CSE_ALifeDynamicObject* object = objects().object(abstract->ID);
-	VERIFY(object);
+    CSE_ALifeDynamicObject* object = objects().object(abstract->ID);
+    VERIFY(object);
 
-	if (!object->children.empty())
-	{
-		u32 children_count = object->children.size();
-		u32 bytes = children_count * sizeof(ALife::_OBJECT_ID);
-		ALife::_OBJECT_ID* children = (ALife::_OBJECT_ID*)_alloca(bytes);
-		CopyMemory(children, &*object->children.begin(), bytes);
+    if (!object->children.empty())
+    {
+        u32 children_count = object->children.size();
+        u32 bytes = children_count * sizeof(ALife::_OBJECT_ID);
+        ALife::_OBJECT_ID* children = (ALife::_OBJECT_ID*)_alloca(bytes);
+        CopyMemory(children, &*object->children.begin(), bytes);
 
-		ALife::_OBJECT_ID* I = children;
-		ALife::_OBJECT_ID* E = children + children_count;
-		for (; I != E; ++I)
-		{
-			CSE_ALifeDynamicObject* child = objects().object(*I, true);
+        ALife::_OBJECT_ID* I = children;
+        ALife::_OBJECT_ID* E = children + children_count;
+        for (; I != E; ++I)
+        {
+            CSE_ALifeDynamicObject* child = objects().object(*I, true);
             if (!child)
             {
                 Msg("! [CALifeSimulatorBase::release] Object [%d][%s] has non-existent child [%d]", object->ID, object->name_replace(), *I);
                 continue;
             }
 
-			release(child, alife_query);
-		}
-	}
+            release(child, alife_query);
+        }
+    }
 
-	unregister_object(object, alife_query);
+    unregister_object(object, alife_query);
 
-	object->m_bALifeControl = false;
+    object->m_bALifeControl = false;
 
-	if (alife_query)
-		server().entity_Destroy(abstract);
+    if (alife_query)
+        server().entity_Destroy(abstract);
 }
 
 void CALifeSimulatorBase::append_item_vector(OBJECT_VECTOR& tObjectVector, ITEM_P_VECTOR& tItemList)
